@@ -1,0 +1,37 @@
+{
+  "plugins": [
+    [
+      "babel-plugin-styled-components"
+    ]
+  ],
+  "presets": [
+    ["@babel/preset-typescript"],
+    ["@babel/preset-env"],
+    ["@babel/preset-react"]
+  ]
+}
+
+
+
+// {
+//   "presets": [
+//     [
+//       "@babel/preset-env",
+//       {
+//         "targets": {
+//           "node": "14"
+//         }
+//       }
+//     ]
+//   ],
+//   "plugins": [
+//     "add-module-exports",
+//     [
+//       "inline-dotenv",
+//       {
+//         "path": "./.env.production",
+//         "unsafe": true
+//       }
+//     ]
+//   ]
+// }

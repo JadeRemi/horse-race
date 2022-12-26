@@ -1,7 +1,9 @@
 import * as React from "react";
 
-export function Canvas () {
+export function Canvas() {
     return (
-        <div className="canvas" />
+        <div className="canvas">
+            123
+        </div>
     )
 }

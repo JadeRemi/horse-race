@@ -36,7 +36,7 @@ export function Canvas() {
       
       
     function fillStaticImage(ctx, [...coords]){
-        img = new Image();
+        const img = new Image();
         img.src = RESOURCES.img1.src;
         ctx.drawImage(img, ...coords);
     }

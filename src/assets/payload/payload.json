@@ -1,0 +1,89 @@
+{
+    "options": {
+        "duration": "20000",
+        "participants": "8",
+        "biome": "grass",
+        "layout": "https://user-images.githubusercontent.com/85193527/205508448-20cba659-7c06-4ed1-95a3-0775162ed7ee.png"
+    },
+    "obstacles": [
+        {
+            "id": "11",
+            "name": "Fire trap",
+            "effects": []
+        },
+        {
+            "id": "22",
+            "name": "Poison trap",
+            "effects": []
+        },
+        {
+            "id": "33",
+            "name": "Barrier",
+            "effects": []
+        },
+        {
+            "id": "44",
+            "name": "Lava pit",
+            "effects": []
+        }
+    ],
+    "participants": [
+        {
+            "playerId": "111111",
+            "nickname": "Blue player",
+            "color": "#007da8",
+            "duration": "20000",
+            "place": "8"
+        },
+        {
+            "playerId": "222222",
+            "nickname": "Red player",
+            "color": "#a80500",
+            "duration": "15500",
+            "place": "6"
+        },
+        {
+            "playerId": "333333",
+            "nickname": "Green player",
+            "color": "#15a800",
+            "duration": "17500",
+            "place": "7"
+        },
+        {
+            "playerId": "444444",
+            "nickname": "Yellow player",
+            "color": "#dde727",
+            "duration": "1000",
+            "place": "1"
+        },
+        {
+            "playerId": "555555",
+            "nickname": "Magenta player",
+            "color": "#f738f4",
+            "duration": "11500",
+            "place": "3"
+        },
+        {
+            "playerId": "666666",
+            "nickname": "Brown player",
+            "color": "#6c5101",
+            "duration": "14500",
+            "place": "4"
+        },
+        {
+            "playerId": "777777",
+            "nickname": "Gray player",
+            "color": "#808080",
+            "duration": "15000",
+            "place": "5"
+        },
+        {
+            "playerId": "888888",
+            "nickname": "White player",
+            "color": "#f6f6f1",
+            "duration": "2500",
+            "place": "2"
+        }
+    ]
+
+}

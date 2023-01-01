@@ -1,5 +1,10 @@
 import React, { useRef, useEffect } from "react";
+import { observer } from "mobx-react-lite";
+
 import { Canvas as CanvasBlock, Wrapper } from './styled';
+import { default as imageLoader } from '../../utils/image';
+import { useImage } from '../../utils/hooks/useImage';
+import { useCanvas } from '../../utils/hooks/useCanvas';
 
 const RESOURCES = {
     img1: {
@@ -18,14 +23,12 @@ const focusSpeed = 8;
 
 const fps = 10;
 const frameDuration = 1000 / fps;
-const cell = {
-    size: 50,
-}
+
 const palette = {
     background: '#27c7e1',
 };
 
-export function Canvas() {
+export const Canvas = observer(() => {
 
     const canvasBlock = useRef(null);
 
@@ -36,8 +39,10 @@ export function Canvas() {
       
       
     function fillStaticImage(ctx, [...coords]){
-        const img = new Image();
-        img.src = RESOURCES.img1.src;
+        //const img = new Image();
+        //img.src = useImage(HORSE)
+        //RESOURCES.img1.src;
+        const img = imageLoader.HORSE;
         ctx.drawImage(img, ...coords);
     }
         
@@ -93,6 +98,7 @@ export function Canvas() {
         ctx.fillRect(0, 0, canvasBlock.current.width, canvasBlock.current.height);
         fillBackground(ctx, tile, timestamp, size)
         fillDynamicImage(ctx, img, coordinate, timestamp);
+        fillStaticImage(ctx, coordinate);
         if (ANIMATE) setTimeout((()=>draw(ctx)), frameDuration);
     }
 
@@ -101,4 +107,4 @@ export function Canvas() {
             <CanvasBlock className="canvas" width="600" height="600" ref={canvasBlock} />
         </Wrapper>
     )
-}
+});

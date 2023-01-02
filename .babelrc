@@ -10,28 +10,3 @@
     ["@babel/preset-react"]
   ]
 }
-
-
-
-// {
-//   "presets": [
-//     [
-//       "@babel/preset-env",
-//       {
-//         "targets": {
-//           "node": "14"
-//         }
-//       }
-//     ]
-//   ],
-//   "plugins": [
-//     "add-module-exports",
-//     [
-//       "inline-dotenv",
-//       {
-//         "path": "./.env.production",
-//         "unsafe": true
-//       }
-//     ]
-//   ]
-// }

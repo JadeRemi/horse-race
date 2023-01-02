@@ -23,24 +23,48 @@ module.exports = {
                 loader: "babel-loader"
             },
             {
-                test: /\.scss$/,
-                use: [
-                    MiniCssExtractPlugin.loader,
-                    "css-loader",
-                    "sass-loader"
-                ]
+                test: /\.(png|jpe?g|gif|jp2|webp)$/,
+                loader: 'file-loader',
+                options: {
+                  name: '[name].[ext]'
+                }
             },
             {
-                test: /\.(png|jpg|gif|svg)$/i,
+                test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
                 use: [
-                  {
-                    loader: 'url-loader',
-                    options: {
-                      limit: 8192,
-                    },
-                  },
-                ],
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: '[name].[ext]',
+                            outputPath: 'fonts/'
+                        }
+                    }
+                ]
             }
+
+            // {
+            //     test: /\.ttf$/,
+            //     use: [
+            //         {
+            //             loader: 'ttf-loader',
+            //             options: {
+            //                 name: '[name].[ext]',
+            //                 outputPath: 'fonts/'
+            //             },
+            //         },
+            //     ]
+            // }
+            // {
+            //     test: /\.(png|jpg|gif|svg)$/i,
+            //     use: [
+            //       {
+            //         loader: 'url-loader',
+            //         options: {
+            //           limit: 8192,
+            //         },
+            //       },
+            //     ],
+            // }
         ]
     },
     resolve: {

@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import { observer } from "mobx-react-lite";
 
-import { Canvas as CanvasBlock, Wrapper } from './styled';
+import { Canvas as CanvasBlock, Wrapper, Text } from './styled';
 import { default as imageLoader } from '../../utils/image';
 import { useImage } from '../../utils/hooks/useImage';
 import { useCanvas } from '../../utils/hooks/useCanvas';
@@ -104,6 +104,9 @@ export const Canvas = observer(() => {
 
     return (
         <Wrapper className="canvas-wrapper">
+            <Text>
+                123
+            </Text>
             <CanvasBlock className="canvas" width="600" height="600" ref={canvasBlock} />
         </Wrapper>
     )

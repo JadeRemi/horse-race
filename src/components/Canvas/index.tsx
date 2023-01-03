@@ -3,8 +3,11 @@ import { observer } from "mobx-react-lite";
 
 import { Canvas as CanvasBlock, Wrapper, Text } from './styled';
 import { default as imageLoader } from '../../utils/image';
+import { loadPlayerData } from '../../utils/clientAdapter';
 import { useImage } from '../../utils/hooks/useImage';
 import { useCanvas } from '../../utils/hooks/useCanvas';
+// import { Context } from '../../store/main';
+import { useStateTree } from '../../store/main';
 
 const RESOURCES = {
     img1: {
@@ -28,11 +31,14 @@ const palette = {
     background: '#27c7e1',
 };
 
-export const Canvas = observer(() => {
-
+export function Canvas() {
     const canvasBlock = useRef(null);
 
+    const { replay } = useStateTree();
+    const players = replay?.players;
+
     useEffect(() => {
+        loadPlayerData();
         const canvas = canvasBlock.current.getContext('2d');
         draw(canvas);
     }, []);
@@ -105,9 +111,11 @@ export const Canvas = observer(() => {
     return (
         <Wrapper className="canvas-wrapper">
             <Text>
-                123
+                { players }
             </Text>
             <CanvasBlock className="canvas" width="600" height="600" ref={canvasBlock} />
         </Wrapper>
     )
-});
+};
+
+export default observer(Canvas);

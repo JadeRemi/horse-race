@@ -32,57 +32,167 @@
             "playerId": "111111",
             "nickname": "Blue player",
             "color": "#007da8",
+            "health": "150",
             "duration": "20000",
-            "place": "8"
+            "place": "8",
+            "path": [
+                {
+                    "break": "1000",
+                    "obstacle": "33",
+                    "pass": "true",
+                    "curve": ".17 .67 .83 .67"
+                },
+                {
+                    "break": "6000",
+                    "obstacle": "22",
+                    "pass": "true",
+                    "curve": ".17 .67 .83 .67"
+                },
+                {
+                    "break": "20000",
+                    "curve": ".17 .67 .83 .67"
+                }
+            ]
         },
         {
             "playerId": "222222",
             "nickname": "Red player",
             "color": "#a80500",
+            "health": "150",
             "duration": "15500",
-            "place": "6"
+            "place": "6",
+            "path": [
+                {
+                    "break": "11000",
+                    "obstacle": "22",
+                    "pass": "true",
+                    "curve": ".17 .67 .83 .67"
+                },
+                {
+                    "break": "15500",
+                    "curve": ".17 .67 .83 .67"
+                }
+            ]
         },
         {
             "playerId": "333333",
             "nickname": "Green player",
             "color": "#15a800",
+            "health": "150",
             "duration": "17500",
-            "place": "7"
+            "place": "7",
+            "path": [
+                {
+                    "break": "9000",
+                    "obstacle": "11",
+                    "pass": "true",
+                    "curve": ".17 .67 .83 .67"
+                },
+                {
+                    "break": "17500",
+                    "curve": ".17 .67 .83 .67"
+                }
+            ]
         },
         {
             "playerId": "444444",
             "nickname": "Yellow player",
             "color": "#dde727",
+            "health": "150",
             "duration": "1000",
-            "place": "1"
+            "place": "1",
+            "path": [
+                {
+                    "break": "500",
+                    "obstacle": "22",
+                    "pass": "true",
+                    "curve": ".17 .67 .83 .67"
+                },
+                {
+                    "break": "1000",
+                    "curve": ".17 .67 .83 .67"
+                }
+            ]
         },
         {
             "playerId": "555555",
             "nickname": "Magenta player",
             "color": "#f738f4",
+            "health": "150",
             "duration": "11500",
-            "place": "3"
+            "place": "3",
+            "path": [
+                {
+                    "break": "10500",
+                    "obstacle": "22",
+                    "pass": "true",
+                    "curve": ".17 .67 .83 .67"
+                },
+                {
+                    "break": "11500",
+                    "curve": ".17 .67 .83 .67"
+                }
+            ]
         },
         {
             "playerId": "666666",
             "nickname": "Brown player",
             "color": "#6c5101",
+            "health": "150",
             "duration": "14500",
-            "place": "4"
+            "place": "4",
+            "path": [
+                {
+                    "break": "8500",
+                    "obstacle": "22",
+                    "pass": "true",
+                    "curve": ".17 .67 .83 .67"
+                },
+                {
+                    "break": "14500",
+                    "curve": ".17 .67 .83 .67"
+                }
+            ]
         },
         {
             "playerId": "777777",
             "nickname": "Gray player",
             "color": "#808080",
+            "health": "150",
             "duration": "15000",
-            "place": "5"
+            "place": "5",
+            "path": [
+                {
+                    "break": "6500",
+                    "obstacle": "11",
+                    "pass": "true",
+                    "curve": ".17 .67 .83 .67"
+                },
+                {
+                    "break": "15000",
+                    "curve": ".17 .67 .83 .67"
+                }
+            ]
         },
         {
             "playerId": "888888",
             "nickname": "White player",
             "color": "#f6f6f1",
+            "health": "150",
             "duration": "2500",
-            "place": "2"
+            "place": "2",
+            "path": [
+                {
+                    "break": "1500",
+                    "obstacle": "11",
+                    "pass": "true",
+                    "curve": ".17 .67 .83 .67"
+                },
+                {
+                    "break": "2500",
+                    "curve": ".17 .67 .83 .67"
+                }
+            ]
         }
     ]
 

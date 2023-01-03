@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import { observer } from "mobx-react-lite";
 
-import { Canvas as CanvasBlock, Wrapper, Text } from './styled';
+import { Canvas as CanvasBlock, Wrapper, Text, Container } from './styled';
 import { default as imageLoader } from '../../utils/image';
 import { loadPlayerData } from '../../utils/clientAdapter';
 import { useImage } from '../../utils/hooks/useImage';
@@ -110,10 +110,12 @@ export function Canvas() {
 
     return (
         <Wrapper className="canvas-wrapper">
-            <Text>
-                { players }
-            </Text>
-            <CanvasBlock className="canvas" width="600" height="600" ref={canvasBlock} />
+            <Container>
+                <Text>
+                    { players }
+                </Text>
+                <CanvasBlock className="canvas" width="640" height="480" ref={canvasBlock} />
+            </Container>
         </Wrapper>
     )
 };

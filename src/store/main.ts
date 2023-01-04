@@ -17,6 +17,8 @@ const initialState = RootModel.create({
     settings: {
         width: DEFAULTS.width,
         height: DEFAULTS.height,
+        framesPerSecond: DEFAULTS.framesPerSecond,
+        animate: DEFAULTS.animate,
     }
 });
 
@@ -35,10 +37,3 @@ export function useStateTree() {
     }
     return store;
 }
-
-// const store = Store.create(
-//     {
-//     }
-//   );
-// export const Context = createContext();
-// export default store;

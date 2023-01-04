@@ -1,5 +1,6 @@
 {
     "width": 640,
     "height": 480,
-    "framesPerSecond": 30 
+    "framesPerSecond": 30,
+    "animate": false
 }

@@ -9,12 +9,10 @@ import { useWindowSize } from '../../utils/hooks/useSize';
 // import { Context } from '../../store/main';
 import { useStateTree } from '../../store/main';
 import { draw } from '../../utils/render/draw';
-import CONFIG from '../../config/canvas.json';
 
 export function Canvas() {
     const canvasBlock = useRef<HTMLCanvasElement | null>(null);
     const { width: windowWidth, height: windowHeight } : { width: number, height : number } = useWindowSize();
-    // const { width: canvaswidth, height: canvasHeight } : { width: number, height : number } = CONFIG;
 
     const { replay, settings } = useStateTree();
     const { players } : { players: number } = replay;

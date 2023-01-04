@@ -25,11 +25,105 @@ import OBSTACLE_LAVA from '../../assets/images/actor/obstacle_lava.png';
 import OBSTACLE_MINE from '../../assets/images/actor/obstacle_mine.png';
 import OBSTACLE_POISON from '../../assets/images/actor/obstacle_poison_bubble.png';
 
-
-
 export default {
     HORSE: {
-        frames: 8,
+        frames: 9,
         path: HORSE,
-    }
+    },
+    HORSE_OUTLINE: {
+        frames: 9,
+        path: HORSE_OUTLINE,
+    },
+    HORSE_OUTLINE_JOCKEY: {
+        frames: 9,
+        path: HORSE_OUTLINE_JOCKEY,
+    },
+    JOCKEY: {
+        frames: 9,
+        path: JOCKEY,
+    },
+    HORSE_JOCKEY: {
+        frames: 9,
+        path: HORSE_JOCKEY,
+    },
+    HORSE_SHADOW: {
+        frames: 9,
+        path: HORSE_SHADOW,
+    },
+    EXPLOSION: {
+        frames: 9,
+        path: EXPLOSION,
+    },
+    BUBBLE_SHADOW: {
+        frames: 1,
+        path: BUBBLE_SHADOW,
+    },
+    FIRE_THIN: {
+        frames: 9,
+        path: FIRE_THIN,
+    },
+    FIRE_WIDE: {
+        frames: 9,
+        path: FIRE_WIDE,
+    },
+    FIRE_BLOB: {
+        frames: 7,
+        path: FIRE_BLOB,
+    },
+    FIRE_CLOUD: {
+        frames: 9,
+        path: FIRE_CLOUD,
+    },
+    FIRE_POISON_THIN: {
+        frames: 9,
+        path: FIRE_POISON_THIN,
+    },
+    FIRE_POISON_WIDE: {
+        frames: 9,
+        path: FIRE_POISON_WIDE,
+    },
+    POISON_BLOB: {
+        frames: 9,
+        path: POISON_BLOB,
+    },
+    POISON_CLOUD: {
+        frames: 9,
+        path: POISON_CLOUD,
+    },
+    POISON_POP: {
+        frames: 10,
+        path: POISON_POP,
+    },
+
+    OBSTACLE_JUMP: {
+        frames: 2,
+        path: OBSTACLE_JUMP,
+    },
+    OBSTACLE_FIRE: {
+        frames: 9,
+        path: OBSTACLE_FIRE,
+    },
+    OBSTACLE_LAVA: {
+        frames: 1,
+        path: OBSTACLE_LAVA,
+    },
+    OBSTACLE_MINE: {
+        frames: 2,
+        path: OBSTACLE_MINE,
+    },
+    OBSTACLE_POISON: {
+        frames: 1,
+        path: OBSTACLE_POISON,
+    },
+    // multi-actor atlas
+    HORSE_JUMP: {
+        frames: 15,
+        rows: 5,
+        path: HORSE_JUMP,
+    },
+    HORSE_RUN: {
+        frames: 9,
+        rows: 5,
+        path: HORSE_RUN,
+    },
 };

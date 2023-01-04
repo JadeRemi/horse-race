@@ -10,6 +10,7 @@ interface PlayerContext {
 
 interface ConfigContext {
     setDimensions: Function,
+    setAnimationParams: Function,
     width: number,
     height: number,
 }
@@ -29,9 +30,16 @@ export function loadSettings({
 } : {
     settings: ConfigContext,
 }) {
-    const { width, height } : { width: number, height: number} = CONFIG;
+    const {
+        width, height, framesPerSecond, animate
+    } : {
+        width: number, height: number, framesPerSecond: number, animate: boolean
+    } = CONFIG;
     settings.setDimensions({
         width, height
+    });
+    settings.setAnimationParams({
+        framesPerSecond, animate
     });
 
 }

@@ -26,7 +26,6 @@ export function fillBackground({
     const height = size;
     const xAxisPoints = canvasWidth / length;
     const yAxisPoints = canvasHeight / height;
-    const loopActive = 1;
     const pixelsPerCycle = size * focusSpeed;
 
     function activeLoop() {

@@ -1,6 +1,7 @@
 import { fillBackground } from './fillBackground';
 import { fillAnimation } from './fillAnimation';
 import { fillStatic } from './fillStatic';
+import CONFIG from '../../config/canvas.json';
 
 const RESOURCES = {
     img1: {
@@ -21,8 +22,6 @@ const fps = 10;
 
 const frameDuration = 1000 / fps;
 
-const ANIMATE = false;
-
 export function draw({
     ctx,
     canvas
@@ -30,6 +29,7 @@ export function draw({
     ctx: CanvasRenderingContext2D | null,
     canvas: HTMLCanvasElement | null
 }) {
+    const { animate } = CONFIG;
     const image = RESOURCES.img1;
     const tile = RESOURCES.img2;
     const coordinateX = 50;
@@ -42,7 +42,7 @@ export function draw({
     fillBackground({ ctx, image: tile, timestamp, size, fps, canvasWidth, canvasHeight })
     fillAnimation({ ctx, image, coordinateX, coordinateY, timestamp, fps });
     fillStatic({ ctx, coordinateX, coordinateY });
-    if (ANIMATE) setTimeout((()=>{
+    if (animate) setTimeout((()=>{
         draw({ ctx, canvas })
     }), frameDuration);
 }

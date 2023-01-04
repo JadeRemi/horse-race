@@ -14,16 +14,16 @@ export function fillAnimation({
     timestamp: number,
     fps: number,
 }){
-    const preciseTick = timestamp / (1000 / (fps * image.speed));
-    const frame = Math.ceil( preciseTick % image.frames);
-    const { frames } = image;
+    const { frames, speed, src } = image;
+    const preciseTick = timestamp / (1000 / (fps * speed));
+    const frame = Math.ceil( preciseTick % frames);
     const frameBound = frame < 0
         ? 0
         : frame > frames - 1
             ? frames - 1
             : frame;
     const img = new Image();
-    img.src = image.src;
+    img.src = src;
     const length = img.width / frames;
     const height = img.height;
     ctx.drawImage(img, length * frameBound, 0, length, height, coordinateX, coordinateY, length, height);

@@ -34,7 +34,7 @@
   },
   "globals": {
     "Caman": true,
-    "Promise": true // remove that line as soon as this ancient eslint setup is updated
+    "Promise": true
   },
   "rules": {
     "no-dupe-class-members": 2,

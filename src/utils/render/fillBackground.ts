@@ -28,7 +28,8 @@ export function fillBackground({
     const yAxisPoints = canvasHeight / height;
     const loopActive = 1;
     const pixelsPerCycle = size * focusSpeed;
-    if (!!loopActive) {
+
+    function activeLoop() {
         ctx.save();
         const offset = Math.ceil(preciseTick % pixelsPerCycle);
 
@@ -41,4 +42,6 @@ export function fillBackground({
         }
       ctx.restore();
     }
+
+    activeLoop();
 }

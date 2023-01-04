@@ -8,7 +8,7 @@ export function fillAnimation({
     fps,
 } : {
     ctx: CanvasRenderingContext2D | null,
-    image: string,
+    image: Object,
     coordinateX: number,
     coordinateY: number,
     timestamp: number,

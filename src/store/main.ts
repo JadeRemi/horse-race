@@ -1,15 +1,22 @@
 import { types, Instance } from 'mobx-state-tree';
 
 import { createContext, useContext } from 'react';
-import { Replay } from "./replay";
+import { Replay } from './replay';
+import { Settings } from './settings';
+import { DEFAULTS } from '../config/defaults';
 
 const RootModel = types.model({
-    replay: Replay
+    replay: Replay,
+    settings: Settings,
 });
 
-let initialState = RootModel.create({
+const initialState = RootModel.create({
     replay: {
-        players: 0,
+        players: DEFAULTS.players,
+    },
+    settings: {
+        width: DEFAULTS.width,
+        height: DEFAULTS.height,
     }
 });
 

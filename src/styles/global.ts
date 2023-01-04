@@ -1,6 +1,6 @@
-import { createGlobalStyle } from "styled-components";
-import ocraextended from "../assets/fonts/ocraextended.ttf";
-//src: url(${OcraExtended}) format('ttf');
+import { createGlobalStyle } from 'styled-components';
+import ocraextended from '../assets/fonts/ocraextended.ttf';
+
 export const GlobalStyle = createGlobalStyle`
 @font-face {
   font-family: 'Ocra';

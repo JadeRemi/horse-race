@@ -1,7 +1,7 @@
 //require("file-loader?name=[name].[ext]!./index.html");
-import React from "react";
-import ReactDOM from "react-dom";
-import { App } from "./App";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { App } from './App';
 
 const AppFallback = () => {
     return <div>Starting</div>
@@ -10,5 +10,5 @@ const AppFallback = () => {
 
 ReactDOM.render(
     <App />,
-    document.getElementById("app")
+    document.getElementById('app')
 );

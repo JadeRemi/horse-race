@@ -1,8 +1,8 @@
-import React, { useRef, useEffect } from "react";
-import { observer } from "mobx-react-lite";
+import React, { useRef, useEffect } from 'react';
+import { observer } from 'mobx-react-lite';
 
 import { Canvas as CanvasBlock, Wrapper, Text, Container } from './styled';
-import { loadPlayerData } from '../../utils/clientAdapter';
+import { loadPlayerData, loadSettings } from '../../utils/clientAdapter';
 import { useImage } from '../../utils/hooks/useImage';
 import { useCanvas } from '../../utils/hooks/useCanvas';
 import { useWindowSize } from '../../utils/hooks/useSize';
@@ -14,12 +14,14 @@ import CONFIG from '../../config/canvas.json';
 export function Canvas() {
     const canvasBlock = useRef<HTMLCanvasElement | null>(null);
     const { width: windowWidth, height: windowHeight } : { width: number, height : number } = useWindowSize();
-    const { width: canvaswidth, height: canvasHeight } : { width: number, height : number } = CONFIG;
+    // const { width: canvaswidth, height: canvasHeight } : { width: number, height : number } = CONFIG;
 
-    const { replay } = useStateTree();
-    const players = replay?.players;
+    const { replay, settings } = useStateTree();
+    const { players } : { players: number } = replay;
+    const { width: canvaswidth, height: canvasHeight } : { width: number, height : number } = settings;
 
     useEffect(() => {
+        loadSettings({ settings });
         loadPlayerData({ replay });
         if (canvasBlock.current) {
             const ctx = canvasBlock.current.getContext('2d');

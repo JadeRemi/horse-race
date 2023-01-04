@@ -12,7 +12,7 @@ export function fillBackground({
     canvasHeight,
 }: {
     ctx: CanvasRenderingContext2D | null,
-    image: string,
+    image: Object,
     timestamp: number,
     size: number,
     fps: number,

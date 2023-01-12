@@ -12,13 +12,19 @@ const RootModel = types.model({
 
 const initialState = RootModel.create({
     replay: {
-        players: DEFAULTS.players,
+        participants: DEFAULTS.participants,
+        duration: DEFAULTS.duration,
+        length: DEFAULTS.length,
+        biome: DEFAULTS.biome,
     },
     settings: {
         width: DEFAULTS.width,
         height: DEFAULTS.height,
         framesPerSecond: DEFAULTS.framesPerSecond,
         animate: DEFAULTS.animate,
+        parallaxSpeed: DEFAULTS.parallaxSpeed,
+        backgroundPalette: DEFAULTS.backgroundPalette,
+        focusSpeed: DEFAULTS.focusSpeed,
     }
 });
 

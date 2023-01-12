@@ -2,13 +2,26 @@ import { types } from 'mobx-state-tree';
 
 export const Replay = types
   .model({
-    players: types.number
+    participants: types.number,
+    duration: types.number,
+    length: types.number,
+    biome: types.string,
   })
   .actions(self => ({
-    increment() {
-      self.players++;
+    setPlayerData({
+      participants,
+      duration,
+      length,
+      biome,
+    } : {
+      participants: number,
+      duration: number,
+      length: number,
+      biome: string,
+    }) {
+      self.participants = participants;
+      self.duration = duration;
+      self.length = length;
+      self.biome = biome;
     },
-    decrement() {
-      self.players--;
-    }
   }));

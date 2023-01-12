@@ -1,7 +1,11 @@
 import { fillBackground } from './fillBackground';
+import { fillParallax } from './fillParallax';
 import { fillAnimation } from './fillAnimation';
 import { fillStatic } from './fillStatic';
 import CONFIG from '../../config/canvas.json';
+import { SettingsInterface } from '../validations/models'
+
+import { useStateTree } from '../../store/main';
 
 const RESOURCES = {
     img1: {
@@ -14,20 +18,18 @@ const RESOURCES = {
     },
 }
 
-const palette = {
-    background: '#27c7e1',
-};
-
 const fps = 10;
 
 const frameDuration = 1000 / fps;
 
 export function draw({
     ctx,
-    canvas
+    canvas,
+    settings,
 } : {
     ctx: CanvasRenderingContext2D | null,
-    canvas: HTMLCanvasElement | null
+    canvas: HTMLCanvasElement | null,
+    settings: SettingsInterface | null,
 }) {
     const { animate } = CONFIG;
     const image = RESOURCES.img1;
@@ -37,12 +39,13 @@ export function draw({
     const timestamp = Date.now();
     const size = 20;
     const { width: canvasWidth, height: canvasHeight } = canvas;
-    ctx.fillStyle = palette.background;
-    ctx.fillRect(0, 0, canvasWidth, canvasHeight);
-    fillBackground({ ctx, image: tile, timestamp, size, fps, canvasWidth, canvasHeight })
+    const { backgroundPalette, focusSpeed } : { backgroundPalette: string, focusSpeed: number } = settings;
+
+    fillBackground({ ctx, canvasWidth, canvasHeight, backgroundPalette});
+    fillParallax({ ctx, image: tile, timestamp, size, fps, canvasWidth, canvasHeight, focusSpeed })
     fillAnimation({ ctx, image, coordinateX, coordinateY, timestamp, fps });
     fillStatic({ ctx, coordinateX, coordinateY });
     if (animate) setTimeout((()=>{
-        draw({ ctx, canvas })
+        draw({ ctx, canvas, settings })
     }), frameDuration);
 }

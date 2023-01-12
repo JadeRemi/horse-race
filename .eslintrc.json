@@ -152,10 +152,7 @@
         /**
          * Style
          */
-        "indent": [2, 2, { // https://eslint.org/docs/rules/indent
-          "SwitchCase": 1,
-          "ignoredNodes": ["TemplateLiteral"]
-        }],
+        "indent": ["error", "tab"],
         "template-curly-spacing": "off",
         "brace-style": [2, // https://eslint.org/docs/rules/brace-style
           "1tbs", {

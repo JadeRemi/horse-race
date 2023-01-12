@@ -1,3 +1,4 @@
+import { ImageInterface } from '../validations/models'
 
 export function fillAnimation({
     ctx,
@@ -8,7 +9,7 @@ export function fillAnimation({
     fps,
 } : {
     ctx: CanvasRenderingContext2D | null,
-    image: Object,
+    image: ImageInterface,
     coordinateX: number,
     coordinateY: number,
     timestamp: number,

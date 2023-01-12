@@ -4,7 +4,8 @@
         "participants": "8",
         "biome": "grass",
         "layout": "https://user-images.githubusercontent.com/85193527/205508448-20cba659-7c06-4ed1-95a3-0775162ed7ee.png",
-        "length": "20000"
+        "length": "20000",
+        "focused": "2"
     },
     "obstacles": [
         {
@@ -36,6 +37,7 @@
             "health": "150",
             "duration": "20000",
             "place": "8",
+            "speed": "4.15",
             "path": [
                 {
                     "break": "1000",
@@ -62,6 +64,7 @@
             "health": "150",
             "duration": "15500",
             "place": "6",
+            "speed": "4.0",
             "path": [
                 {
                     "break": "11000",
@@ -82,6 +85,7 @@
             "health": "150",
             "duration": "17500",
             "place": "7",
+            "speed": "3.9",
             "path": [
                 {
                     "break": "9000",
@@ -102,6 +106,7 @@
             "health": "150",
             "duration": "1000",
             "place": "1",
+            "speed": "3.1",
             "path": [
                 {
                     "break": "500",
@@ -122,6 +127,7 @@
             "health": "150",
             "duration": "11500",
             "place": "3",
+            "speed": "3.8",
             "path": [
                 {
                     "break": "10500",
@@ -142,6 +148,7 @@
             "health": "150",
             "duration": "14500",
             "place": "4",
+            "speed": "3.4",
             "path": [
                 {
                     "break": "8500",
@@ -162,6 +169,7 @@
             "health": "150",
             "duration": "15000",
             "place": "5",
+            "speed": "4.5",
             "path": [
                 {
                     "break": "6500",
@@ -182,6 +190,7 @@
             "health": "150",
             "duration": "2500",
             "place": "2",
+            "speed": "3.5",
             "path": [
                 {
                     "break": "1500",

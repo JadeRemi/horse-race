@@ -27,6 +27,7 @@ export interface PayloadSettings {
     biome: string,
     layout: string,
     length: string,
+    focused: string,
 }
 
 export interface PayloadObstacle {
@@ -48,6 +49,7 @@ export interface PayloadParticipant {
     health: string,
     duration: string,
     place: string,
+    speed: string,
     path: PayloadPath[],
 }
 
@@ -63,6 +65,7 @@ export interface ConvertedSettings {
     biome: string,
     layout: string,
     length: number,
+    focused: number,
 }
 
 export interface ConvertedObstacle {
@@ -84,6 +87,7 @@ export interface ConvertedParticipant {
     health: number,
     duration: number,
     place: number,
+    speed: number,
     path: ConvertedPath[],
 }
 

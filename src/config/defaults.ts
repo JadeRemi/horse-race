@@ -11,4 +11,5 @@ export const DEFAULTS = {
     backgroundPalette: "#fff",
     focusSpeed: 8,
     instantErrorNotification: false,
+    focused: 1,
 }

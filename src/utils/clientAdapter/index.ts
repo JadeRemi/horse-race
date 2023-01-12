@@ -29,6 +29,7 @@ interface PlayerContext {
     duration: number,
     length: number,
     biome: string,
+    focused: number,
 }
 
 interface ConfigContext {
@@ -46,9 +47,9 @@ export function loadPlayerData({
     const { options } = convertPlayerData({
         payload: PAYLOAD,
     });
-    const { participants, duration, length, biome } = options;
+    const { participants, duration, length, biome, focused } = options;
     replay.setPlayerData({
-        participants, duration, length, biome
+        participants, duration, length, biome, focused
     });
 
 }
@@ -74,6 +75,7 @@ export function convertPlayerData({
             biome,
             layout,
             length,
+            focused,
         } = _options;
 
         const { error: durationError, value: convertedDuration } = toNumber({ value: duration, type: 'duration' });
@@ -81,12 +83,14 @@ export function convertPlayerData({
         const { error: biomeError, value: convertedBiome } = toString({ value: biome, type: 'biome' });
         const { error: layoutError, value: convertedLayout } = toString({ value: layout, type: 'layout' });
         const { error: lengthError, value: convertedLength } = toNumber({ value: length, type: 'length' });
+        const { error: focusedError, value: convertedFocused } = toNumber({ value: focused, type: 'focused' });
         const errorCollection = [
             durationError,
             participantsError,
             biomeError,
             layoutError,
             lengthError,
+            focusedError,
         ];
 
         collectErrors({
@@ -100,6 +104,7 @@ export function convertPlayerData({
             biome: convertedBiome,
             layout: convertedLayout,
             length: convertedLength,
+            focused: convertedFocused,
         }
     }
 
@@ -160,6 +165,7 @@ export function convertPlayerData({
             health,
             duration,
             place,
+            speed,
             path,
         } = _player;
 
@@ -170,6 +176,7 @@ export function convertPlayerData({
         const { error: healthError, value: convertedHealth } = toNumber({ value: health, type: 'health' });
         const { error: durationError, value: convertedDuration } = toNumber({ value: duration, type: 'duration' });
         const { error: placeError, value: convertedPlace } = toNumber({ value: place, type: 'place' });
+        const { error: speedError, value: convertedSpeed } = toNumber({ value: speed, type: 'speed' });
         const { errors: pathErrors, value: convertedPath } = convertPath({ _path: path });
 
         const errorCollection = [
@@ -179,6 +186,7 @@ export function convertPlayerData({
             healthError,
             durationError,
             placeError,
+            speedError,
             ...pathErrors,
         ];
 
@@ -196,6 +204,7 @@ export function convertPlayerData({
                 health: convertedHealth,
                 duration: convertedDuration,
                 place: convertedPlace,
+                speed: convertedSpeed,
                 path: convertedPath,
             })
         }

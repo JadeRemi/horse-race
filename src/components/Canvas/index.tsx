@@ -15,8 +15,8 @@ export function Canvas() {
     const { width: windowWidth, height: windowHeight } : { width: number, height : number } = useWindowSize();
 
     const { replay, settings } = useStateTree();
-    const { participants, duration, length, biome } : {
-        participants: number, duration: number, length: number, biome: string
+    const { participants, duration, length, biome, focused } : {
+        participants: number, duration: number, length: number, biome: string, focused: number
     } = replay;
     const { width: canvaswidth, height: canvasHeight } : { width: number, height : number } = settings;
 
@@ -34,7 +34,7 @@ export function Canvas() {
             <Wrapper className="canvas-wrapper">
                 <Container>
                     <Text>
-                        { participants } { duration } { length } { biome }
+                        { participants } { duration } { length } { biome } { focused }
                     </Text>
                     <CanvasBlock className="canvas" width={canvaswidth} height={canvasHeight} ref={canvasBlock} />
                 </Container>

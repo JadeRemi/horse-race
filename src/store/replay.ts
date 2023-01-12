@@ -6,6 +6,7 @@ export const Replay = types
     duration: types.number,
     length: types.number,
     biome: types.string,
+    focused: types.number,
   })
   .actions(self => ({
     setPlayerData({
@@ -13,15 +14,18 @@ export const Replay = types
       duration,
       length,
       biome,
+      focused,
     } : {
       participants: number,
       duration: number,
       length: number,
       biome: string,
+      focused: number,
     }) {
       self.participants = participants;
       self.duration = duration;
       self.length = length;
       self.biome = biome;
+      self.focused = focused;
     },
   }));

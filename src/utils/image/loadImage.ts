@@ -1,5 +1,7 @@
-export function loadImage(img: string) {
+import { IImage } from "../validations/models";
+
+export function loadImage(img: IImage) {
     const image = new Image();
-    image.src = img;
+    image.src = img.path;
     return image;
 };

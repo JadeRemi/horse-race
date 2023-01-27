@@ -1,9 +1,10 @@
 {
-    "width": 640,
-    "height": 480,
-    "framesPerSecond": 30,
-    "animate": false,
-    "parallaxSpeed": 10,
-    "backgroundPalette": "#27c7e1",
-    "focusSpeed": 8
+	"width": 640,
+	"height": 480,
+	"framesPerSecond": 30,
+	"animate": true,
+	"parallaxSpeed": 10,
+	"cycleSpeed": 3,
+	"backgroundPalette": "#27c7e1",
+	"focusSpeed": 8
 }

@@ -1,15 +1,16 @@
+import { ISource } from '../validations/models';
 
 export function fillBackground({
-    ctx,
-    canvasWidth,
-    canvasHeight,
-    backgroundPalette,
+	source: { ctx, atlas },
+	canvasWidth,
+	canvasHeight,
+	backgroundPalette,
 }: {
-    ctx: CanvasRenderingContext2D | null,
-    canvasWidth: number,
-    canvasHeight: number,
-    backgroundPalette: string,
+	source: ISource;
+	canvasWidth: number;
+	canvasHeight: number;
+	backgroundPalette: string;
 }) {
-    ctx.fillStyle = backgroundPalette;
-    ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+	ctx.fillStyle = backgroundPalette;
+	ctx.fillRect(0, 0, canvasWidth, canvasHeight);
 }

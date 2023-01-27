@@ -1,14 +1,17 @@
-import { default as imageLoader } from '../image';
+// import { default as imageLoader } from '../image';
+import { loadImage } from '../image/loadImage';
+import { CoordinateInterface, ISource } from '../validations/models'
 
 export function fillStatic({
-    ctx,
-    coordinateX,
-    coordinateY,
+    source: { ctx, atlas },
+    coordinate,
 } : {
-    ctx: CanvasRenderingContext2D | null,
-    coordinateX: number,
-    coordinateY: number,
+    source: ISource,
+    coordinate: CoordinateInterface,
 }){
-    const img = imageLoader.HORSE;
+    const img = loadImage(
+        atlas.ACTORS.HORSE
+    );
+    const { x: coordinateX, y: coordinateY } = coordinate;
     ctx.drawImage(img, coordinateX, coordinateY);
 }

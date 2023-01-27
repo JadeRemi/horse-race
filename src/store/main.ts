@@ -6,27 +6,28 @@ import { Settings } from './settings';
 import { DEFAULTS } from '../config/defaults';
 
 const RootModel = types.model({
-    replay: Replay,
-    settings: Settings,
+	replay: Replay,
+	settings: Settings,
 });
 
 const initialState = RootModel.create({
-    replay: {
-        participants: DEFAULTS.participants,
-        duration: DEFAULTS.duration,
-        length: DEFAULTS.length,
-        biome: DEFAULTS.biome,
-        focused: DEFAULTS.focused,
-    },
-    settings: {
-        width: DEFAULTS.width,
-        height: DEFAULTS.height,
-        framesPerSecond: DEFAULTS.framesPerSecond,
-        animate: DEFAULTS.animate,
-        parallaxSpeed: DEFAULTS.parallaxSpeed,
-        backgroundPalette: DEFAULTS.backgroundPalette,
-        focusSpeed: DEFAULTS.focusSpeed,
-    }
+	replay: {
+		participants: DEFAULTS.participants,
+		duration: DEFAULTS.duration,
+		length: DEFAULTS.length,
+		biome: DEFAULTS.biome,
+		focused: DEFAULTS.focused,
+	},
+	settings: {
+		width: DEFAULTS.width,
+		height: DEFAULTS.height,
+		framesPerSecond: DEFAULTS.framesPerSecond,
+		animate: DEFAULTS.animate,
+		parallaxSpeed: DEFAULTS.parallaxSpeed,
+		cycleSpeed: DEFAULTS.cycleSpeed,
+		backgroundPalette: DEFAULTS.backgroundPalette,
+		focusSpeed: DEFAULTS.focusSpeed,
+	},
 });
 
 export const rootStore = initialState;
@@ -38,9 +39,9 @@ const RootStoreContext = createContext<null | RootInstance>(null);
 export const Provider = RootStoreContext.Provider;
 
 export function useStateTree() {
-    const store = useContext(RootStoreContext);
-    if (store === null) {
-        throw new Error("Store was not found, provide a context");
-    }
-    return store;
+	const store = useContext(RootStoreContext);
+	if (store === null) {
+		throw new Error('Store was not found, provide a context');
+	}
+	return store;
 }

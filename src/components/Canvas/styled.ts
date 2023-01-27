@@ -15,8 +15,18 @@ export const Wrapper = styled.div`
 export const Canvas = styled.canvas`
 `;
 
+export const Button = styled.button`
+`;
+
 export const Container = styled.div`
     margin: auto;
+`;
+
+export const Bar = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
 `;
 
 export const Text = styled.p`

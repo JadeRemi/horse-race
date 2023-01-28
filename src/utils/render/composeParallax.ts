@@ -1,9 +1,10 @@
-import { useMemo } from 'react';
+import { loadImage } from '../image/loadImage';
 import {
 	ImageInterface,
 	CoordinateInterface,
 	ISource,
-	IParallax,
+	IParallaxDisplay,
+	ICanvasParams,
 } from '../validations/models';
 
 export function composeParallax({
@@ -12,57 +13,54 @@ export function composeParallax({
 	parallaxSpeed,
 	timestamp,
 	fps,
-	canvasWidth,
-	canvasHeight,
+	canvasParams,
 	focusSpeed,
 }: {
 	source: ISource;
-	parallax: IParallax;
+	parallax: IParallaxDisplay;
 	parallaxSpeed: number;
 	timestamp: number;
 	fps: number;
-	canvasWidth: number;
-	canvasHeight: number;
+	canvasParams: ICanvasParams;
 	focusSpeed: number;
 }) {
-	function getImageInfo(input: ImageInterface) {
-		const img = new Image();
-		img.src = input.path;
-		return img;
-	}
 
+	const { canvasWidth, canvasHeight } = canvasParams;
+	if (canvasWidth <= 0 || canvasHeight <= 0) return;
 	const preciseTick = timestamp / (1000 / (fps * focusSpeed));
-	const { track, sky, skyline, landscape } = parallax;
+	const { track, sky, skyline, landscape, border, fence: {
+		top: fenceTop, bottom: fenceBottom,
+	} } = parallax;
 
-	const trackImage = getImageInfo(track);
-	const skyImage = getImageInfo(sky);
-	const skylineImage = getImageInfo(skyline);
-	const landscapeImage = getImageInfo(landscape);
+	const fixedTiles = [ sky ];
+	const iterableTiles = [ track, skyline, landscape, border, fenceTop, fenceBottom ];
 
-	const { naturalWidth: length, naturalHeight: height } = trackImage;
-	const xAxisPoints = canvasWidth / length;
-	const yAxisPoints = canvasHeight / height;
-	const pixelsPerCycle = length * focusSpeed;
-
-	function renderGrid(): void {
-		ctx.save();
+	function renderGrid(image : HTMLImageElement): void {
+		//const xAxisPoints = canvasWidth / length;
+		//const yAxisPoints = canvasHeight / height;
+		const { naturalWidth: length, naturalHeight: height } = image;
+		const pixelsPerCycle = length * focusSpeed;
 		const offset = Math.ceil(preciseTick % pixelsPerCycle);
+
+		ctx.save();
 		for (let i = 0; i < canvasWidth + pixelsPerCycle; i += length) {
 			for (let y = 0; y < canvasHeight; y += height) {
 				ctx.save();
-				ctx.drawImage(trackImage, i - offset, y, length, height);
+				ctx.drawImage(image, i - offset, y, length, height);
 				ctx.restore();
 			}
 		}
 		ctx.restore();
 	}
 
-	function renderSky(): void {
+	function renderFixedTile(image : HTMLImageElement): void {
 		const ratio = canvasWidth / canvasHeight;
+		const { naturalWidth: length, naturalHeight: height } = image;
+		if (length <= 0 || height <= 0) return;
 
-		const skyHeight = height; //* ratio;
+		const imageHeight = height * ratio;
 		ctx.drawImage(
-			skyImage,
+			image,
 			0,
 			0,
 			length,
@@ -70,22 +68,28 @@ export function composeParallax({
 			0,
 			0,
 			canvasWidth,
-			skyHeight,
+			imageHeight,
 		);
 	}
 
-	function renderTrack(): void {
-		//ctx.save()
-
-		//const offset = Math.ceil(preciseTick % pixelsPerCycle)
+	function renderIterableTile(image : HTMLImageElement): void {
+		const { naturalWidth: length, naturalHeight: height } = image;
 		const offset = Math.ceil(preciseTick % length);
 
 		const { x, y }: CoordinateInterface = {
 			x: 0,
-			y: 50,
+			y: 0,
 		};
-		ctx.drawImage(trackImage, x - offset, y, length, height);
+		//ctx.drawImage(image, x - offset, y, length, height);
+		if (length <= 0 || height <= 0) {
+			return;
+		}
+		for (let i = +x; i <= canvasWidth + length; i += length) {
+			ctx.drawImage(image, i - offset, y, length, height);
+		}
 
+		//ctx.save()
+		//const offset = Math.ceil(preciseTick % pixelsPerCycle)
 		// for (let i = x; i < canvasWidth + pixelsPerCycle; i += length) {
 		//
 		//         ctx.save();
@@ -93,12 +97,16 @@ export function composeParallax({
 		//         ctx.restore();
 		//
 		// }
-
 		//ctx.restore()
 	}
 
-	renderSky();
-	renderTrack();
 
-	// renderGrid();
+	//const fixedTilesImages = Object.values(fixedTiles) || [];
+	//const iterableTilesImages = Object.values(iterableTiles) || [];
+	fixedTiles.forEach((x : ImageInterface) => renderFixedTile(
+		loadImage(x)
+	));
+	iterableTiles.forEach((x : ImageInterface) => renderIterableTile(
+		loadImage(x)
+	));
 }

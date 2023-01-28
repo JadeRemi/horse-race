@@ -79,6 +79,7 @@ export function Canvas() {
                     },
                     canvas: canvasBlock.current,
                     settings,
+                    replay,
                 });
             }, frameDuration);
         }

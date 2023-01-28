@@ -1,3 +1,13 @@
+type ArrayLengthMutationKeys = 'splice' | 'push' | 'pop' | 'shift' |  'unshift'
+type FixedLengthArray<T, L extends number, TObj = [T, ...Array<T>]> =
+  Pick<TObj, Exclude<keyof TObj, ArrayLengthMutationKeys>>
+  & {
+    readonly length: L 
+    [ I : number ] : T
+    [Symbol.iterator]: () => IterableIterator<T>   
+  }
+
+
 export interface ImageInterface {
 	path: string;
 	speed?: number;
@@ -28,6 +38,14 @@ export interface DimensionsInterface {
 export interface SettingsInterface
 	extends DimensionsInterface,
 		AnimationInterface {}
+
+export interface ReplayInterface {
+	participants: number,
+	duration: number,
+	length: number,
+	biome: string,
+	focused: number,
+}
 
 export interface PayloadSettings {
 	duration: string;
@@ -158,9 +176,51 @@ export interface ISource {
 	loaded: boolean;
 }
 
-export interface IParallax {
-	track: ImageInterface;
+export interface ICanvasParams {
+	canvasWidth: number;
+	canvasHeight: number;
+}
+
+export interface IParallaxDisplay {
 	sky: ImageInterface;
 	skyline: ImageInterface;
 	landscape: ImageInterface;
+	track: ImageInterface;
+	fence: { 
+		top: ImageInterface;
+		bottom: ImageInterface;
+	},
+	border: ImageInterface;
 }
+
+export interface IActorsDisplay {
+	horse: ImageInterface;
+}
+
+export interface IOverlayDisplay {
+	avatar: ImageInterface;
+	rating: ImageInterface;
+}
+
+export interface IFrameRequest {
+	x: number,
+	y: number,
+	height: number,
+	width: number,
+}
+
+export type IDrawImageParamsFixed =
+	FixedLengthArray<number, 2> |
+	FixedLengthArray<number, 4> |
+	FixedLengthArray<number, 8>
+
+
+export type IDrawImageParamsConditional =
+	[ number, number ] |
+	[ number, number, number, number ] |
+	[ number, number, number, number, number, number, number, number ]
+
+export type IDrawImageParamsMax =
+	[ number, number, number, number, number, number, number, number ]	
+
+export type IDrawArgs = Array<number | HTMLImageElement>;

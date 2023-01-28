@@ -1,8 +1,8 @@
 import { fillBackground } from './fillBackground';
 import { composeParallax } from './composeParallax';
-import { fillAnimation } from './fillAnimation';
-import { fillStatic } from './fillStatic';
-import { SettingsInterface, ISource } from '../validations/models';
+import { composeActors } from './composeActors';
+import { composeOverlay } from './composeOverlay';
+import { SettingsInterface, ReplayInterface, ISource } from '../validations/models';
 import { default as DICTIONARY } from '../../utils/image/assetDictionary';
 import { DEFAULTS } from '../../config/defaults';
 
@@ -21,26 +21,33 @@ export function draw({
 	source,
 	canvas,
 	settings,
+	replay,
 }: {
 	source: ISource;
 	canvas: HTMLCanvasElement | null;
 	settings: SettingsInterface | null;
+	replay: ReplayInterface | null;
 }) {
-	const horse = DICTIONARY.ACTORS.HORSE;
 	const layout = {
 		track: DICTIONARY.TILES.TRACK_DIRT,
 		sky: DICTIONARY.TILES.BACK_SKY,
 		skyline: DICTIONARY.TILES.BACK_ROCKS,
 		landscape: DICTIONARY.TILES.BACK_DUNES,
+		fence: { 
+			top: DICTIONARY.TILES.FENCE_GRASS_TOP,
+			bottom: DICTIONARY.TILES.FENCE_GRASS_BOTTOM,
+		},
+		border: DICTIONARY.TILES.BORDER_GRASS,
+
 	};
-	const coordinate = {
-		x: 50,
-		y: 50,
-	};
-	const coordinate2 = {
-		x: 150,
-		y: 150,
-	};
+	const actors = {
+		horse: DICTIONARY.ACTORS.HORSE,
+	}
+	const overlay = {
+		avatar: DICTIONARY.TILES.PFP_EXAMPLE,
+		rating: DICTIONARY.TILES.UI_BANNER,
+	}
+
 	const fps = DEFAULTS.framesPerSecond;
 	const timestamp = Date.now();
 	const { width: canvasWidth, height: canvasHeight } = canvas;
@@ -55,27 +62,54 @@ export function draw({
 		parallaxSpeed: number;
 		cycleSpeed: number;
 	} = settings;
+	const { participants } : {
+        participants: number,
+    } = replay;
 
-	fillBackground({ source, canvasWidth, canvasHeight, backgroundPalette });
+	fillBackground({
+		source,
+		canvasParams: {
+			canvasWidth,
+			canvasHeight,
+		},
+		backgroundPalette,
+	});
 	composeParallax({
 		source,
 		parallax: layout,
 		parallaxSpeed,
 		timestamp,
 		fps,
-		canvasWidth,
-		canvasHeight,
+		canvasParams: {
+			canvasWidth,
+			canvasHeight,
+		},
 		focusSpeed,
 	});
-	fillAnimation({
+	composeActors({
 		source,
-		image: horse,
-		coordinate: coordinate2,
+		actors,
 		timestamp,
 		fps,
+		canvasParams: {
+			canvasWidth,
+			canvasHeight,
+		},
+		focusSpeed,
 		cycleSpeed,
+		participants,
 	});
-	fillStatic({ source, coordinate });
+	composeOverlay({
+		source,
+		overlay,
+		timestamp,
+		fps,
+		canvasParams: {
+			canvasWidth,
+			canvasHeight,
+		},
+		focusSpeed,
+	});
 
 	//setTimeout((()=>{
 	//    draw({ source, canvas, settings, animate })

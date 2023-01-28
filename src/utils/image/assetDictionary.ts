@@ -31,8 +31,8 @@ import FENCE_DIRT_TOP from '../../assets/images/background/fence/fence_dirt_1.pn
 import FENCE_DIRT_BOTTOM from '../../assets/images/background/fence/fence_dirt_2.png';
 import FENCE_GRASS_TOP from '../../assets/images/background/fence/fence_grass_1.png';
 import FENCE_GRASS_BOTTOM from '../../assets/images/background/fence/fence_grass_2.png';
-import FENCE_GRASS from '../../assets/images/background/fence/fence_grass.png';
-import FENCE_SAND from '../../assets/images/background/fence/fence_sand.png';
+import BORDER_GRASS from '../../assets/images/background/fence/fence_grass.png';
+import BORDER_SAND from '../../assets/images/background/fence/fence_sand.png';
 
 import BACK_DUNES from '../../assets/images/background/sky/back_dunes.png';
 import BACK_ROCKS from '../../assets/images/background/sky/back_rocks.png';
@@ -166,11 +166,11 @@ const TILES = {
 	FENCE_GRASS_BOTTOM: {
 		path: FENCE_GRASS_BOTTOM,
 	},
-	FENCE_GRASS: {
-		path: FENCE_GRASS,
+	BORDER_GRASS: {
+		path: BORDER_GRASS,
 	},
-	FENCE_SAND: {
-		path: FENCE_SAND,
+	BORDER_SAND: {
+		path: BORDER_SAND,
 	},
 	BACK_DUNES: {
 		path: BACK_DUNES,

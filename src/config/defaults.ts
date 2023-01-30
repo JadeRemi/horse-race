@@ -9,13 +9,17 @@ export const DEFAULTS = {
 	animate: true,
 	parallaxSpeed: 10,
 	cycleSpeed: 3,
-	backgroundPalette: '#fff',
+	backgroundPalette: '#FFFFFF',
 	focusSpeed: 8,
 	instantErrorNotification: false,
 	focused: 1,
+	textColor: '#FFFFFF',
+	textFont: 'Ocra',
+	trackToBGRatio: '35',
 };
 
 export const DEFAULT_NAMES = {
 	YES: '✓',
 	NO: '✗',
+	UNKNOWN: 'UNKNOWN',
 };

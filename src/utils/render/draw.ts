@@ -56,11 +56,15 @@ export function draw({
 		focusSpeed,
 		parallaxSpeed,
 		cycleSpeed,
+		textColor,
+		textFont,
 	}: {
 		backgroundPalette: string;
 		focusSpeed: number;
 		parallaxSpeed: number;
 		cycleSpeed: number;
+		textColor: string;
+		textFont: string;
 	} = settings;
 	const { participants } : {
         participants: number,
@@ -108,7 +112,12 @@ export function draw({
 			canvasWidth,
 			canvasHeight,
 		},
+		textParams: {
+			color: textColor,
+			font: textFont,
+		},
 		focusSpeed,
+		participants,
 	});
 
 	//setTimeout((()=>{

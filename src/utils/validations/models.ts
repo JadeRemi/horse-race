@@ -25,6 +25,8 @@ export interface AnimationInterface {
 	cycleSpeed: number;
 	backgroundPalette: string;
 	focusSpeed: number;
+	textColor: string;
+	textFont: string;
 }
 export interface AnimateInterface {
 	animate: boolean;
@@ -181,6 +183,11 @@ export interface ICanvasParams {
 	canvasHeight: number;
 }
 
+export interface ITextParams {
+	font: string;
+	color: string;
+}
+
 export interface IParallaxDisplay {
 	sky: ImageInterface;
 	skyline: ImageInterface;
@@ -224,3 +231,8 @@ export type IDrawImageParamsMax =
 	[ number, number, number, number, number, number, number, number ]	
 
 export type IDrawArgs = Array<number | HTMLImageElement>;
+
+export interface IFitTo {
+	height?: number,
+	width?: number,
+}

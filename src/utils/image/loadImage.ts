@@ -34,3 +34,34 @@ export function requestFrame({
         width: frameLength,
     };
 };
+
+export function fitImageToScale({
+    sourceWidth,
+    sourceHeight,
+    destinationWidth,
+    destinationHeight,
+} : {
+    sourceWidth: number;
+    sourceHeight: number;
+    destinationWidth?: number;
+    destinationHeight?: number;
+}) : {
+    fitWidth: number;
+    fitHeight: number;
+} {
+
+    const avoidFit = !destinationWidth && !destinationHeight;
+
+
+    const fitWidth = avoidFit
+        ? sourceWidth
+        : destinationWidth || sourceWidth / (sourceHeight / destinationHeight);
+    const fitHeight = avoidFit
+        ? sourceHeight
+        : destinationHeight || sourceHeight / (sourceWidth / destinationWidth);
+
+    return {
+        fitWidth,
+        fitHeight,
+    };
+}

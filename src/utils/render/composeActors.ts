@@ -37,7 +37,7 @@ export function composeActors({
 		y: canvasHeight / 2,
 	};
 
-	const verticalOffset = -30
+	const verticalOffset = -30;
 
 	for (let i = 0; i < participants; i += 1) {
 		const trackPosition = y + verticalOffset + (i * ( 
@@ -48,13 +48,17 @@ export function composeActors({
 			y: trackPosition,
 		}
 
+		const horseImage = loadImage(horse);
+		const { frames : imageFrames = 1 } : { frames?: number } = horse;
+		
 		fillAnimation({
 			source,
-			image: horse,
+			image: horseImage,
 			coordinate,
 			timestamp,
 			fps,
 			cycleSpeed,
+			imageFrames,
 		});
 
 	}

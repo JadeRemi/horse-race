@@ -16,6 +16,8 @@ export const Settings = types
 		cycleSpeed: types.number,
 		backgroundPalette: types.string,
 		focusSpeed: types.number,
+		textColor: types.string,
+		textFont: types.string,
 	})
 	.actions(self => ({
 		setDimensions({ width, height }: DimensionsInterface) {
@@ -28,12 +30,16 @@ export const Settings = types
 			cycleSpeed,
 			backgroundPalette,
 			focusSpeed,
+			textColor,
+			textFont,
 		}: AnimationInterface) {
 			self.framesPerSecond = framesPerSecond;
 			self.parallaxSpeed = parallaxSpeed;
 			self.cycleSpeed = cycleSpeed;
 			self.backgroundPalette = backgroundPalette;
 			self.focusSpeed = focusSpeed;
+			self.textColor = textColor;
+			self.textFont = textFont;
 		},
 		setAnimate({ animate }: AnimateInterface) {
 			self.animate = animate;

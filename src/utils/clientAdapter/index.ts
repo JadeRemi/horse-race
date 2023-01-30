@@ -348,6 +348,8 @@ export function loadSettings({ settings }: { settings: ConfigContext }) {
 		cycleSpeed,
 		backgroundPalette,
 		focusSpeed,
+		textColor,
+		textFont,
 	}: {
 		width: number;
 		height: number;
@@ -357,6 +359,8 @@ export function loadSettings({ settings }: { settings: ConfigContext }) {
 		cycleSpeed: number;
 		backgroundPalette: string;
 		focusSpeed: number;
+		textColor: string;
+		textFont: string;
 	} = CONFIG;
 	settings.setDimensions({
 		width,
@@ -368,6 +372,8 @@ export function loadSettings({ settings }: { settings: ConfigContext }) {
 		cycleSpeed,
 		backgroundPalette,
 		focusSpeed,
+		textColor,
+		textFont,
 	});
 	settings.setAnimate({
 		animate,

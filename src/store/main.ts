@@ -27,6 +27,8 @@ const initialState = RootModel.create({
 		cycleSpeed: DEFAULTS.cycleSpeed,
 		backgroundPalette: DEFAULTS.backgroundPalette,
 		focusSpeed: DEFAULTS.focusSpeed,
+		textColor: DEFAULTS.textColor,
+		textFont: DEFAULTS.textFont,
 	},
 });
 

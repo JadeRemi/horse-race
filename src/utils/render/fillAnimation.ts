@@ -11,25 +11,29 @@ export function fillAnimation({
 	timestamp,
 	fps,
 	cycleSpeed,
+	imageFrames,
 }: {
 	source: ISource;
-	image: ImageInterface;
+	image: HTMLImageElement;
 	coordinate: CoordinateInterface;
 	timestamp: number;
 	fps: number;
 	cycleSpeed: number;
+	imageFrames: number;
 }) {
-	const { frames, path } = image;
+
 	const preciseTick = timestamp / (1000 / (fps * cycleSpeed));
-	const frame = Math.ceil(preciseTick % frames);
+	const frame = Math.ceil(preciseTick % imageFrames);
 	const { x: coordinateX, y: coordinateY } = coordinate;
-	const frameBound = frame < 0 ? 0 : frame > frames - 1 ? frames - 1 : frame;
-	const img = new Image();
-	img.src = path;
-	const length = img.width / frames;
-	const height = img.height;
+	const frameBound = frame < 0
+		? 0
+		: frame > imageFrames - 1
+			? imageFrames - 1
+			: frame;
+	const length = image.width / imageFrames;
+	const height = image.height;
 	ctx.drawImage(
-		img,
+		image,
 		length * frameBound,
 		0,
 		length,

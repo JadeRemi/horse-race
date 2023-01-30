@@ -2,16 +2,20 @@ import {
 	ImageInterface,
 	CoordinateInterface,
 	ISource,
+	IFitTo,
 } from '../validations/models';
+import { fillStatic } from './fillStatic';
+import { requestFrame } from '../image/loadImage';
 
 export function fillAnimation({
-	source: { ctx, atlas },
+	source,//: { ctx, atlas },
 	image,
 	coordinate,
 	timestamp,
 	fps,
 	cycleSpeed,
 	imageFrames,
+	fitTo,
 }: {
 	source: ISource;
 	image: HTMLImageElement;
@@ -20,27 +24,39 @@ export function fillAnimation({
 	fps: number;
 	cycleSpeed: number;
 	imageFrames: number;
+	fitTo?: IFitTo;
 }) {
 
 	const preciseTick = timestamp / (1000 / (fps * cycleSpeed));
 	const frame = Math.ceil(preciseTick % imageFrames);
-	const { x: coordinateX, y: coordinateY } = coordinate;
 	const frameBound = frame < 0
 		? 0
 		: frame > imageFrames - 1
 			? imageFrames - 1
 			: frame;
-	const length = image.width / imageFrames;
-	const height = image.height;
-	ctx.drawImage(
+
+	const requestImageFrame = requestFrame({
 		image,
-		length * frameBound,
-		0,
-		length,
-		height,
-		coordinateX,
-		coordinateY,
-		length,
-		height,
-	);
+		framesCount: imageFrames,
+		frame: frameBound,
+   })
+
+	fillStatic({
+		source,
+		image,
+		coordinate,
+		request: requestImageFrame,
+	});
+
+	// ctx.drawImage(
+	// 	image,
+	// 	length * frameBound,
+	// 	0,
+	// 	length,
+	// 	height,
+	// 	coordinateX,
+	// 	coordinateY,
+	// 	length,
+	// 	height,
+	// );
 }

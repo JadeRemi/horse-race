@@ -30,7 +30,6 @@ export function composeActors({
 	if (canvasWidth <= 0 || canvasHeight <= 0) return;
 	if (participants <= 0) return;
 
-	const preciseTick = timestamp / (1000 / (fps * focusSpeed));
 	const { horse } = actors;
 	const { x, y } = {
 		x: canvasWidth / 2,
@@ -42,15 +41,16 @@ export function composeActors({
 	for (let i = 0; i < participants; i += 1) {
 		const trackPosition = y + verticalOffset + (i * ( 
 			(canvasHeight / 2 - 50)
-			 / participants));
-		const coordinate = {
-			x,
-			y: trackPosition,
-		}
+			/ participants));
 
 		const horseImage = loadImage(horse);
 		const { frames : imageFrames = 1 } : { frames?: number } = horse;
-		
+		const centerActorOffset = horseImage.width / imageFrames / 2 || 0;
+		const coordinate = {
+			x: x - centerActorOffset,
+			y: trackPosition,
+		}
+
 		fillAnimation({
 			source,
 			image: horseImage,

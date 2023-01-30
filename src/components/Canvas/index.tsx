@@ -98,9 +98,11 @@ export function Canvas() {
             <Wrapper className="canvas-wrapper">
                 <Container>
                     <Bar>
-                        <Text>
+                        { false &&
+                            <Text>
                             { participants } { duration } { length } { biome } { focused }
                         </Text>
+                        }
                         <Button
                             onClick={toggleAnimate}
                         >

@@ -25,10 +25,11 @@ export function requestFrame({
     const frameLength = vertical ? image.width : image.width / framesCount;
 	const frameHeight = vertical ? image.height / rowsCount : image.height;
 
-    if (frameLength <= 0 || frameHeight <= 0 || frame <= 0) return;
+
+    if (frameLength <= 0 || frameHeight <= 0 || frame < 0) return;
 
     return {
-        x: vertical ? 0 : (frame - 1) * frameLength,
+        x: vertical ? 0 : frame * frameLength, // (frame - 1)
         y: vertical ? (row - 1) * frameHeight : 0,
         height: frameHeight,
         width: frameLength,

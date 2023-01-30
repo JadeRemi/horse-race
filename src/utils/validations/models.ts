@@ -202,6 +202,9 @@ export interface IParallaxDisplay {
 
 export interface IActorsDisplay {
 	horse: ImageInterface;
+	jockey: ImageInterface;
+	shadow: ImageInterface;
+	obstacle: ImageInterface;
 }
 
 export interface IOverlayDisplay {

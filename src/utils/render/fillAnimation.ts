@@ -29,7 +29,7 @@ export function fillAnimation({
 
 	const preciseTick = timestamp / (1000 / (fps * cycleSpeed));
 	const frame = Math.ceil(preciseTick % imageFrames);
-	const frameBound = frame < 0
+	const frameBound = frame <= 0
 		? 0
 		: frame > imageFrames - 1
 			? imageFrames - 1

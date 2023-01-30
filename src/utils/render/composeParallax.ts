@@ -33,7 +33,8 @@ export function composeParallax({
 	} } = parallax;
 
 	const fixedTiles = [ sky ];
-	const iterableTiles = [ track, skyline, landscape, border, fenceTop, fenceBottom ];
+	const iterableTiles = [ track, border, fenceTop, fenceBottom ];
+	const iterableTilesNaturalSpeed = [ skyline, landscape ];
 
 	function renderGrid(image : HTMLImageElement): void {
 		//const xAxisPoints = canvasWidth / length;
@@ -72,20 +73,25 @@ export function composeParallax({
 		);
 	}
 
-	function renderIterableTile(image : HTMLImageElement): void {
+	function renderIterableTile(image : HTMLImageElement, slow : number = 1): void {
 		const { naturalWidth: length, naturalHeight: height } = image;
-		const offset = Math.ceil(preciseTick % length);
+		const slowModifier = 1.5;
+		const slowdown = slow > 1
+			? (slow * slowModifier)
+			: slow;
+		const offset = Math.ceil(preciseTick % (length * slowdown));
 
 		const { x, y }: CoordinateInterface = {
 			x: 0,
 			y: 0,
 		};
 		//ctx.drawImage(image, x - offset, y, length, height);
-		if (length <= 0 || height <= 0) {
+		if (length <= 0 || height <= 0 || slow <= 0) {
 			return;
 		}
 		for (let i = +x; i <= canvasWidth + length; i += length) {
-			ctx.drawImage(image, i - offset, y, length, height);
+			const coordinateX = (i - (offset / slowdown));
+			ctx.drawImage(image, coordinateX, y, length, height);
 		}
 
 		//ctx.save()
@@ -108,5 +114,9 @@ export function composeParallax({
 	));
 	iterableTiles.forEach((x : ImageInterface) => renderIterableTile(
 		loadImage(x)
+	));
+
+	iterableTilesNaturalSpeed.forEach((x : ImageInterface, index : number, array: ImageInterface[]) => renderIterableTile(
+		loadImage(x), array?.length - index + 1
 	));
 }

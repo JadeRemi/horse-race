@@ -1,5 +1,6 @@
-import { loadImage } from '../image/loadImage';
+import { loadImage, requestFrame } from '../image/loadImage';
 import { fillAnimation } from './fillAnimation';
+import { fillStatic } from './fillStatic';
 import {
 	ISource,
 	ICanvasParams,
@@ -30,7 +31,9 @@ export function composeActors({
 	if (canvasWidth <= 0 || canvasHeight <= 0) return;
 	if (participants <= 0) return;
 
-	const { horse } = actors;
+	const preciseTick = timestamp / (1000 / (fps * focusSpeed));
+
+	const { horse, jockey, shadow, obstacle } = actors;
 	const { x, y } = {
 		x: canvasWidth / 2,
 		y: canvasHeight / 2,
@@ -43,23 +46,89 @@ export function composeActors({
 			(canvasHeight / 2 - 50)
 			/ participants));
 
+
+
 		const horseImage = loadImage(horse);
-		const { frames : imageFrames = 1 } : { frames?: number } = horse;
-		const centerActorOffset = horseImage.width / imageFrames / 2 || 0;
-		const coordinate = {
+		const { frames : horseFrames = 1 } : { frames?: number } = horse;
+		const centerActorOffset = horseImage.width / horseFrames / 2 || 0;
+		const horseCoordinate = {
 			x: x - centerActorOffset,
 			y: trackPosition,
+		}
+		
+		const jockeyImage = loadImage(jockey);
+		const { frames : jockeyFrames = 1 } : { frames?: number } = jockey;
+		const shadowImage = loadImage(shadow);
+		const { frames : shadowFrames = 1 } : { frames?: number } = shadow;
+		const jockeyOffset = 8;
+		const jockeyCoordinate = {
+			x: x - centerActorOffset,
+			y: trackPosition + jockeyOffset,
+		}
+
+		const obstacleImage = loadImage(obstacle);
+		const obstacleRange = 800;
+		const obstacleOffset = Math.ceil(preciseTick % obstacleRange);
+		const obstacleCoordinate = {
+			x: x - centerActorOffset - obstacleOffset + obstacleRange/2,
+			y: trackPosition + jockeyOffset,
 		}
 
 		fillAnimation({
 			source,
-			image: horseImage,
-			coordinate,
+			image: shadowImage,
+			coordinate: jockeyCoordinate,
 			timestamp,
 			fps,
 			cycleSpeed,
-			imageFrames,
+			imageFrames: shadowFrames,
 		});
+
+		fillAnimation({
+			source,
+			image: horseImage,
+			coordinate: horseCoordinate,
+			timestamp,
+			fps,
+			cycleSpeed,
+			imageFrames: horseFrames,
+		});
+
+		fillAnimation({
+			source,
+			image: jockeyImage,
+			coordinate: jockeyCoordinate,
+			timestamp,
+			fps,
+			cycleSpeed,
+			imageFrames: jockeyFrames,
+		});
+
+		const requestRating = requestFrame({
+			image: obstacleImage,
+			framesCount: 2,
+			frame: 1,
+	   })
+
+	   	fillStatic({
+			source,
+			image: obstacleImage,
+			coordinate: obstacleCoordinate,
+			request: requestRating,
+	   	});
+
+		// fillAnimation({
+		// 	source,
+		// 	image: obstacleImage,
+		// 	coordinate: obstacleCoordinate,
+		// 	timestamp,
+		// 	fps,
+		// 	cycleSpeed,
+		// 	imageFrames: 1,
+		// });
+
+
+
 
 	}
 	

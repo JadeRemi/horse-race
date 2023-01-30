@@ -42,6 +42,9 @@ export function draw({
 	};
 	const actors = {
 		horse: DICTIONARY.ACTORS.HORSE,
+		jockey: DICTIONARY.ACTORS.JOCKEY,
+		shadow: DICTIONARY.ACTORS.HORSE_SHADOW,
+		obstacle: DICTIONARY.ACTORS.OBSTACLE_JUMP,
 	}
 	const overlay = {
 		avatar: DICTIONARY.TILES.PFP_EXAMPLE,

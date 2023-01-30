@@ -104,7 +104,7 @@ export function composeActors({
 			imageFrames: jockeyFrames,
 		});
 
-		const requestRating = requestFrame({
+		const requestObstacle = requestFrame({
 			image: obstacleImage,
 			framesCount: 2,
 			frame: 1,
@@ -114,7 +114,7 @@ export function composeActors({
 			source,
 			image: obstacleImage,
 			coordinate: obstacleCoordinate,
-			request: requestRating,
+			request: requestObstacle,
 	   	});
 
 		// fillAnimation({

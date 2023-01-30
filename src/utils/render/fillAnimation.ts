@@ -38,7 +38,7 @@ export function fillAnimation({
 	const requestImageFrame = requestFrame({
 		image,
 		framesCount: imageFrames,
-		frame: frameBound,
+		frame: frameBound + 1,
    })
 
 	fillStatic({

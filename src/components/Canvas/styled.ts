@@ -13,6 +13,10 @@ export const Wrapper = styled.div`
 `;
 
 export const Canvas = styled.canvas`
+    &.phantom {
+        background-color: #000;
+        display: none;
+    }
 `;
 
 export const Button = styled.button`

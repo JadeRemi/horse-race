@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite';
 import { ErrorBoundary } from '../Error/errorBoundary'
 
 import { Canvas as CanvasBlock, Wrapper, Text, Container, Button, Bar } from './styled';
-import { loadPlayerData, loadSettings } from '../../utils/clientAdapter';
+import { loadPlayerData, loadSettings, loadStats } from '../../utils/clientAdapter';
 import { useImage } from '../../utils/hooks/useImage';
 import { useCanvas } from '../../utils/hooks/useCanvas';
 import { useImageLoader } from '../../utils/hooks/useImageLoader';
@@ -11,18 +11,20 @@ import { useWindowSize } from '../../utils/hooks/useSize';
 import { useStateTree } from '../../store/main';
 import { draw } from '../../utils/render/draw';
 import { default as DICTIONARY } from '../../utils/image/assetDictionary';
-import { IImage, IDictionary } from '../../utils/validations/models';
+import {
+    IImage,
+    IDictionary,
+} from '../../utils/validations/models';
 import { DEFAULTS, DEFAULT_NAMES } from '../../config/defaults';
 import CONFIG from '../../config/canvas.json';
 
 export function Canvas() {
     const canvasBlock = useRef<HTMLCanvasElement | null>(null);
-    //const [ animate, setAnimate ] = useState<boolean | null>(null);
+    const phantomBlock = useRef<HTMLCanvasElement | null>(null);
+    const [start, setStart] = useState(0);
     const { width: windowWidth, height: windowHeight } : { width: number, height : number } = useWindowSize();
 
-    const interval = useRef(null);
-
-    const { replay, settings } = useStateTree();
+    const { replay, settings, stats } = useStateTree();
     const { participants, duration, length, biome, focused } : {
         participants: number, duration: number, length: number, biome: string, focused: number
     } = replay;
@@ -31,7 +33,13 @@ export function Canvas() {
     } = settings;
 
     const fps = DEFAULTS.framesPerSecond;
+
     const frameDuration = 1000 / fps;
+
+    function markStart() {
+        const timestamp = Date.now();
+        setStart(timestamp);
+    }
 
     function reduceDictionary(acc : string[], graphic : IImage) : string[] {
         const { path } = graphic;
@@ -55,42 +63,44 @@ export function Canvas() {
     const { graphicsLoaded } = useImageLoader(pathList);
 
     function toggleAnimate() {
-        if (animate) {
-            clearInterval(interval.current);
-        } else {
-            handleInterval();
-        }
+        if (!animate) window.requestAnimationFrame(loopDraw);
+
         settings.setAnimate({
             animate: !animate,
         });
-        
     }
 
-    function handleInterval() {
-        if (canvasBlock.current) {
-            const ctx = canvasBlock.current.getContext('2d');
 
-            interval.current = setInterval(() => {
-                draw({
-                    source: {
-                        ctx,
-                        atlas: DICTIONARY,
-                        loaded: graphicsLoaded,
-                    },
-                    canvas: canvasBlock.current,
-                    settings,
-                    replay,
-                });
-            }, frameDuration);
-        }
-    };
+
+    function loopDraw() {
+        const ctx = canvasBlock.current.getContext('2d');
+        const { animate: innerLoopAnimate } = settings;
+
+        draw({
+            source: {
+                ctx,
+                atlas: DICTIONARY,
+                loaded: graphicsLoaded,
+                phantom: phantomBlock?.current || null,
+            },
+            canvas: canvasBlock.current,
+            settings,
+            replay,
+            stats,
+        });
+
+        if (innerLoopAnimate) window.requestAnimationFrame(loopDraw);
+    }
 
     useEffect(() => {
         loadSettings({ settings });
         loadPlayerData({ replay });
+        loadStats({ stats });
+
+        markStart();
+        window.requestAnimationFrame(loopDraw);
         
-        handleInterval();
-        return () => clearInterval(interval.current);
+        //return () => clearInterval(interval.current);
     }, []);
 
     return (
@@ -98,9 +108,10 @@ export function Canvas() {
             <Wrapper className="canvas-wrapper">
                 <Container>
                     <Bar>
-                        { false &&
+                        { true &&
                             <Text>
                             { participants } { duration } { length } { biome } { focused }
+                            { start }
                         </Text>
                         }
                         <Button
@@ -117,6 +128,12 @@ export function Canvas() {
                     />
                 </Container>
             </Wrapper>
+            <CanvasBlock
+                className="canvas phantom"
+                width={canvaswidth}
+                height={canvasHeight}
+                ref={phantomBlock}
+            />
         </ErrorBoundary>
         
     )

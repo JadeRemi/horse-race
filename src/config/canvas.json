@@ -8,5 +8,7 @@
 	"backgroundPalette": "#27c7e1",
 	"focusSpeed": 8,
 	"textColor": "#FFFFFF",
-	"textFont": "Ocra"
+	"textFont": "Ocra",
+	"players": [],
+	"obstacles": []
 }

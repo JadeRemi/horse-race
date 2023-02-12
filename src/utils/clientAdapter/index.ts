@@ -40,6 +40,12 @@ interface ConfigContext {
 	height: number;
 }
 
+interface StatContext {
+	setStats: Function;
+	players: ConvertedParticipant[];
+	obstacles: ConvertedObstacle[];
+}
+
 export function loadPlayerData({ replay }: { replay: PlayerContext }) {
 	const { options } = convertPlayerData({
 		payload: PAYLOAD,
@@ -173,7 +179,9 @@ export function convertPlayerData({ payload }: { payload: PayloadInterface }) {
 		const {
 			playerId,
 			nickname,
-			color,
+			horseColor,
+            jockeyColor,
+			pfp,
 			health,
 			duration,
 			place,
@@ -190,9 +198,17 @@ export function convertPlayerData({ payload }: { payload: PayloadInterface }) {
 			value: nickname,
 			type: 'nickname',
 		});
-		const { error: colorError, value: convertedColor } = toString({
-			value: color,
-			type: 'color',
+		const { error: horseColorError, value: convertedHorseColor } = toString({
+			value: horseColor,
+			type: 'horseColor',
+		});
+		const { error: jockeyColorError, value: convertedJockeyColor } = toString({
+			value: jockeyColor,
+			type: 'jockeyColor',
+		});
+		const { error: pfpError, value: convertedPfp } = toNumber({
+			value: pfp,
+			type: 'pfp',
 		});
 		const { error: healthError, value: convertedHealth } = toNumber({
 			value: health,
@@ -217,7 +233,9 @@ export function convertPlayerData({ payload }: { payload: PayloadInterface }) {
 		const errorCollection = [
 			playerIdError,
 			nicknameError,
-			colorError,
+			horseColorError,
+			jockeyColorError,
+			pfpError,
 			healthError,
 			durationError,
 			placeError,
@@ -235,7 +253,9 @@ export function convertPlayerData({ payload }: { payload: PayloadInterface }) {
 			items: acc.items.concat({
 				playerId: convertedPlayerId,
 				nickname: convertedNickname,
-				color: convertedColor,
+				horseColor: convertedHorseColor,
+				jockeyColor: convertedJockeyColor,
+				pfp: convertedPfp,
 				health: convertedHealth,
 				duration: convertedDuration,
 				place: convertedPlace,
@@ -377,5 +397,25 @@ export function loadSettings({ settings }: { settings: ConfigContext }) {
 	});
 	settings.setAnimate({
 		animate,
+	});
+}
+
+export function loadStats({ stats }: { stats: StatContext }) {
+
+	// const {
+	// 	participants: players,
+	// 	obstacles,
+	// } : {
+	// 	participants: PayloadParticipant[];
+	// 	obstacles: PayloadObstacle[];
+	// } = CONFIG;
+
+	const { obstacles, participants: players } = convertPlayerData({
+		payload: PAYLOAD,
+	});
+
+	stats.setStats({
+		players,
+		obstacles,
 	});
 }

@@ -5,6 +5,8 @@ import {
 	ISource,
 	ICanvasParams,
 	IActorsDisplay,
+	ConvertedObstacle,
+	ConvertedParticipant,
 } from '../validations/models';
 
 export function composeActors({
@@ -16,6 +18,8 @@ export function composeActors({
 	focusSpeed,
 	cycleSpeed,
 	participants,
+	obstacles,
+	playerStats,
 }: {
 	source: ISource;
 	timestamp: number;
@@ -25,9 +29,12 @@ export function composeActors({
 	focusSpeed: number;
 	cycleSpeed: number;
 	participants: number;
+	obstacles: ConvertedObstacle[],
+	playerStats: ConvertedParticipant[],
 }) {
 
 	const { canvasWidth, canvasHeight } = canvasParams;
+	const phantomParams = { canvasWidth, canvasHeight };
 	if (canvasWidth <= 0 || canvasHeight <= 0) return;
 	if (participants <= 0) return;
 
@@ -46,7 +53,21 @@ export function composeActors({
 			(canvasHeight / 2 - 50)
 			/ participants));
 
+		const playerStat : ConvertedParticipant = playerStats[i];
+		const {
+			horseColor,
+			jockeyColor,
+			pfp,
+		} : {
+			horseColor: string,
+			jockeyColor: string,
+			pfp: number,
+		} = playerStat;
 
+		const phantomColor = {
+			horseColor,
+			jockeyColor,
+		}
 
 		const horseImage = loadImage(horse);
 		const { frames : horseFrames = 1 } : { frames?: number } = horse;
@@ -92,6 +113,8 @@ export function composeActors({
 			fps,
 			cycleSpeed,
 			imageFrames: horseFrames,
+			viaPhantom: true,
+			phantomParams: { ...phantomParams, phantomColor },
 		});
 
 		fillAnimation({
@@ -102,6 +125,8 @@ export function composeActors({
 			fps,
 			cycleSpeed,
 			imageFrames: jockeyFrames,
+			viaPhantom: true,
+			phantomParams: { ...phantomParams, phantomColor },
 		});
 
 		const requestObstacle = requestFrame({

@@ -3,12 +3,13 @@ import {
 	CoordinateInterface,
 	ISource,
 	IFitTo,
+	IPhantomParams,
 } from '../validations/models';
 import { fillStatic } from './fillStatic';
 import { requestFrame } from '../image/loadImage';
 
 export function fillAnimation({
-	source,//: { ctx, atlas },
+	source,
 	image,
 	coordinate,
 	timestamp,
@@ -16,6 +17,9 @@ export function fillAnimation({
 	cycleSpeed,
 	imageFrames,
 	fitTo,
+	viaPhantom = false,
+	phantomParams,
+	fillColor,
 }: {
 	source: ISource;
 	image: HTMLImageElement;
@@ -25,6 +29,9 @@ export function fillAnimation({
 	cycleSpeed: number;
 	imageFrames: number;
 	fitTo?: IFitTo;
+	viaPhantom?: boolean;
+	phantomParams?: IPhantomParams;
+	fillColor?: string;
 }) {
 
 	const preciseTick = timestamp / (1000 / (fps * cycleSpeed));
@@ -46,17 +53,8 @@ export function fillAnimation({
 		image,
 		coordinate,
 		request: requestImageFrame,
+		viaPhantom,
+		phantomParams,
+		fillColor,
 	});
-
-	// ctx.drawImage(
-	// 	image,
-	// 	length * frameBound,
-	// 	0,
-	// 	length,
-	// 	height,
-	// 	coordinateX,
-	// 	coordinateY,
-	// 	length,
-	// 	height,
-	// );
 }

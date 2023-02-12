@@ -73,7 +73,9 @@ export interface PayloadPath {
 export interface PayloadParticipant {
 	playerId: string;
 	nickname: string;
-	color: string;
+	horseColor: string;
+	jockeyColor: string;
+	pfp: string;
 	health: string;
 	duration: string;
 	place: string;
@@ -111,7 +113,9 @@ export interface ConvertedPath {
 export interface ConvertedParticipant {
 	playerId: number;
 	nickname: string;
-	color: string;
+	horseColor: string;
+	jockeyColor: string;
+	pfp: number;
 	health: number;
 	duration: number;
 	place: number;
@@ -176,11 +180,19 @@ export interface ISource {
 	ctx: CanvasRenderingContext2D | null;
 	atlas: IDictionary;
 	loaded: boolean;
+	phantom: HTMLCanvasElement | null;
 }
 
 export interface ICanvasParams {
 	canvasWidth: number;
 	canvasHeight: number;
+}
+
+export interface IPhantomParams extends ICanvasParams {
+	phantomColor?: {
+		horseColor?: string,
+		jockeyColor?: string,
+	}
 }
 
 export interface ITextParams {
@@ -238,4 +250,27 @@ export type IDrawArgs = Array<number | HTMLImageElement>;
 export interface IFitTo {
 	height?: number,
 	width?: number,
+}
+
+export interface TDefaults {
+	participants: number,
+	duration: number,
+	length: number,
+	biome: string,
+	width: number,
+	height: number,
+	framesPerSecond: number,
+	animate: boolean,
+	parallaxSpeed: number,
+	cycleSpeed: number,
+	backgroundPalette: string,
+	focusSpeed: number,
+	instantErrorNotification: boolean,
+	focused: number,
+	textColor: string,
+	textFont: string,
+	trackToBGRatio: number,
+	horseColor: string,
+	players: ConvertedParticipant[],
+	obstacles: ConvertedObstacle[],
 }

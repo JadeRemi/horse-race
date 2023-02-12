@@ -1,4 +1,6 @@
-export const DEFAULTS = {
+import { TDefaults } from '../utils/validations/models';
+
+export const DEFAULTS : TDefaults = {
 	participants: 1,
 	duration: 1,
 	length: 1,
@@ -15,7 +17,10 @@ export const DEFAULTS = {
 	focused: 1,
 	textColor: '#FFFFFF',
 	textFont: 'Ocra',
-	trackToBGRatio: '35',
+	trackToBGRatio: 35,
+	horseColor: '#FFFFFF',
+	players: [],
+	obstacles: [],
 };
 
 export const DEFAULT_NAMES = {

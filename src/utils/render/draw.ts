@@ -2,7 +2,13 @@ import { fillBackground } from './fillBackground';
 import { composeParallax } from './composeParallax';
 import { composeActors } from './composeActors';
 import { composeOverlay } from './composeOverlay';
-import { SettingsInterface, ReplayInterface, ISource } from '../validations/models';
+import {
+	SettingsInterface,
+	ReplayInterface,
+	ISource,
+	ConvertedParticipant,
+	ConvertedObstacle,
+} from '../validations/models';
 import { default as DICTIONARY } from '../../utils/image/assetDictionary';
 import { DEFAULTS } from '../../config/defaults';
 
@@ -22,12 +28,15 @@ export function draw({
 	canvas,
 	settings,
 	replay,
+	stats,
 }: {
 	source: ISource;
 	canvas: HTMLCanvasElement | null;
 	settings: SettingsInterface | null;
 	replay: ReplayInterface | null;
+	stats: { players: ConvertedParticipant[], obstacles: ConvertedObstacle[] }
 }) {
+	//const { phantom } : { phantom: HTMLCanvasElement | null } = source;
 	const layout = {
 		track: DICTIONARY.TILES.TRACK_DIRT,
 		sky: DICTIONARY.TILES.BACK_SKY,
@@ -69,9 +78,17 @@ export function draw({
 		textColor: string;
 		textFont: string;
 	} = settings;
+
 	const { participants } : {
         participants: number,
     } = replay;
+
+	const {
+		players, obstacles,
+	} : {
+		players: ConvertedParticipant[], obstacles: ConvertedObstacle[],
+	} = stats;
+
 
 	fillBackground({
 		source,
@@ -105,6 +122,8 @@ export function draw({
 		focusSpeed,
 		cycleSpeed,
 		participants,
+		obstacles,
+		playerStats: players,
 	});
 	composeOverlay({
 		source,

@@ -4,13 +4,19 @@ import { createContext, useContext } from 'react';
 import { Replay } from './replay';
 import { Settings } from './settings';
 import { DEFAULTS } from '../config/defaults';
+import { Stats } from './stats';
 
 const RootModel = types.model({
 	replay: Replay,
 	settings: Settings,
+	stats: Stats,
 });
 
 const initialState = RootModel.create({
+	stats: {
+		players: DEFAULTS.players,
+		obstacles: DEFAULTS.obstacles,
+	},
 	replay: {
 		participants: DEFAULTS.participants,
 		duration: DEFAULTS.duration,

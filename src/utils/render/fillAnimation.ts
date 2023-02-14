@@ -19,7 +19,6 @@ export function fillAnimation({
 	fitTo,
 	viaPhantom = false,
 	phantomParams,
-	fillColor,
 }: {
 	source: ISource;
 	image: HTMLImageElement;
@@ -31,7 +30,6 @@ export function fillAnimation({
 	fitTo?: IFitTo;
 	viaPhantom?: boolean;
 	phantomParams?: IPhantomParams;
-	fillColor?: string;
 }) {
 
 	const preciseTick = timestamp / (1000 / (fps * cycleSpeed));
@@ -55,6 +53,5 @@ export function fillAnimation({
 		request: requestImageFrame,
 		viaPhantom,
 		phantomParams,
-		fillColor,
 	});
 }

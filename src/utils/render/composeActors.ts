@@ -64,10 +64,7 @@ export function composeActors({
 			pfp: number,
 		} = playerStat;
 
-		const phantomColor = {
-			horseColor,
-			jockeyColor,
-		}
+		//const { horseColor, jockeyColor } : { horseColor?: string, jockeyColor?: string } = phantomColor;
 
 		const horseImage = loadImage(horse);
 		const { frames : horseFrames = 1 } : { frames?: number } = horse;
@@ -114,7 +111,7 @@ export function composeActors({
 			cycleSpeed,
 			imageFrames: horseFrames,
 			viaPhantom: true,
-			phantomParams: { ...phantomParams, phantomColor },
+			phantomParams: { ...phantomParams, phantomColor: horseColor },
 		});
 
 		fillAnimation({
@@ -126,7 +123,7 @@ export function composeActors({
 			cycleSpeed,
 			imageFrames: jockeyFrames,
 			viaPhantom: true,
-			phantomParams: { ...phantomParams, phantomColor },
+			phantomParams: { ...phantomParams, phantomColor: jockeyColor },
 		});
 
 		const requestObstacle = requestFrame({

@@ -189,10 +189,7 @@ export interface ICanvasParams {
 }
 
 export interface IPhantomParams extends ICanvasParams {
-	phantomColor?: {
-		horseColor?: string,
-		jockeyColor?: string,
-	}
+	phantomColor?: string,
 }
 
 export interface ITextParams {

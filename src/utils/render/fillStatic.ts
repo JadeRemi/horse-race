@@ -4,7 +4,7 @@ import {
     IFrameRequest,
     IDrawImageParamsMax,
     IFitTo,
-    ICanvasParams,
+    IPhantomParams,
 } from '../validations/models'
 import { fitImageToScale } from '../image/loadImage';
 import { DEFAULTS } from '../../config/defaults';
@@ -17,7 +17,7 @@ export function fillStatic({
     fitTo,
     viaPhantom = false,
     phantomParams,
-    fillColor,
+    //fillColor,
 } : {
     source: ISource,
     image: HTMLImageElement;
@@ -25,16 +25,20 @@ export function fillStatic({
     request: IFrameRequest | undefined;
     fitTo?: IFitTo;
     viaPhantom?: boolean;
-    phantomParams?: ICanvasParams;
-	fillColor?: string;
+    phantomParams?: IPhantomParams;
+	//fillColor?: string;
 }){
     const phantomCtx = phantom.getContext('2d');
-    const { canvasWidth: phantomWidth = 0, canvasHeight: phantomHeight = 0 } = phantomParams || {};
+    const {
+        canvasWidth: phantomWidth = 0,
+        canvasHeight: phantomHeight = 0,
+        phantomColor = DEFAULTS.horseColor,
+    } = phantomParams || {};
 
     // function createOffset() : void {
     //     const phantomX = 0;
     //     const phantomY = 0;
-// 
+
     //     const offsetArray = [-1,-1, 0,-1, 1,-1, -1,0, 1,0, -1,1, 0,1, 1,1];
     //     const thickness = 2;
     //  
@@ -44,7 +48,7 @@ export function fillStatic({
     //             phantomY + offsetArray[iterator+1] * thickness,
     //         );
     //     }
-// 
+
     //     phantomCtx.globalCompositeOperation = "source-in";
     //     phantomCtx.fillStyle = "black";
     //     phantomCtx.fillRect( 0, 0, phantomWidth, phantomHeight );
@@ -98,7 +102,7 @@ export function fillStatic({
         );
 
         phantomCtx.globalCompositeOperation = 'source-atop';
-        phantomCtx.fillStyle = fillColor || DEFAULTS.horseColor;
+        phantomCtx.fillStyle = phantomColor;
         phantomCtx.fillRect(0,0,phantomWidth, phantomHeight);
         phantomCtx.globalCompositeOperation = 'darken';
 

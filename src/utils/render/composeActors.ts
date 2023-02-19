@@ -57,11 +57,9 @@ export function composeActors({
 		const {
 			horseColor,
 			jockeyColor,
-			pfp,
 		} : {
 			horseColor: string,
 			jockeyColor: string,
-			pfp: number,
 		} = playerStat;
 
 		//const { horseColor, jockeyColor } : { horseColor?: string, jockeyColor?: string } = phantomColor;

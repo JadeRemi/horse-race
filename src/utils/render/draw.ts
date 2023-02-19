@@ -65,22 +65,23 @@ export function draw({
 	const { width: canvasWidth, height: canvasHeight } = canvas;
 	const {
 		backgroundPalette,
-		focusSpeed,
+		//focusSpeed,
 		parallaxSpeed,
 		cycleSpeed,
 		textColor,
 		textFont,
 	}: {
 		backgroundPalette: string;
-		focusSpeed: number;
+		//focusSpeed: number;
 		parallaxSpeed: number;
 		cycleSpeed: number;
 		textColor: string;
 		textFont: string;
 	} = settings;
 
-	const { participants } : {
+	const { participants, focused } : {
         participants: number,
+		focused: number,
     } = replay;
 
 	const {
@@ -88,6 +89,12 @@ export function draw({
 	} : {
 		players: ConvertedParticipant[], obstacles: ConvertedObstacle[],
 	} = stats;
+
+	function mainPlayer(player : ConvertedParticipant) {
+		return player?.id === focused;
+	}
+
+	const focusSpeed = players.find(mainPlayer)?.speed || DEFAULTS.focusSpeed
 
 
 	fillBackground({
@@ -140,6 +147,7 @@ export function draw({
 		},
 		focusSpeed,
 		participants,
+		playerStats: players,
 	});
 
 	//setTimeout((()=>{

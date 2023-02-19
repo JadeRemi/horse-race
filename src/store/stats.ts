@@ -14,6 +14,7 @@ const Path = types.model({
 });
 
 const Player = types.model({
+  id: types.number,
   playerId: types.number,
   nickname: types.string,
   horseColor: types.string,

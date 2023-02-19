@@ -21,6 +21,7 @@ export const DEFAULTS : TDefaults = {
 	horseColor: '#FFFFFF',
 	players: [],
 	obstacles: [],
+	pfp: 1,
 };
 
 export const DEFAULT_NAMES = {

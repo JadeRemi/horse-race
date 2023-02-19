@@ -71,6 +71,7 @@ export interface PayloadPath {
 }
 
 export interface PayloadParticipant {
+	id: string;
 	playerId: string;
 	nickname: string;
 	horseColor: string;
@@ -111,6 +112,7 @@ export interface ConvertedPath {
 }
 
 export interface ConvertedParticipant {
+	id: number;
 	playerId: number;
 	nickname: string;
 	horseColor: string;
@@ -270,4 +272,5 @@ export interface TDefaults {
 	horseColor: string,
 	players: ConvertedParticipant[],
 	obstacles: ConvertedObstacle[],
+	pfp: number,
 }

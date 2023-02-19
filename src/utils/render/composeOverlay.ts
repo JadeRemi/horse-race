@@ -6,10 +6,11 @@ import {
 	ISource,
 	ICanvasParams,
 	IOverlayDisplay,
+	ConvertedParticipant,
 } from '../validations/models';
 
 import { ordinal } from '../misc/ordinal';
-import { DEFAULT_NAMES } from '../../config/defaults';
+import { DEFAULTS, DEFAULT_NAMES } from '../../config/defaults';
 
 export function composeOverlay({
 	source,
@@ -20,6 +21,7 @@ export function composeOverlay({
 	textParams,
 	focusSpeed,
 	participants,
+	playerStats,
 }: {
 	source: ISource;
 	overlay: IOverlayDisplay;
@@ -29,6 +31,7 @@ export function composeOverlay({
 	textParams: ITextParams;
 	focusSpeed: number;
 	participants: number;
+	playerStats: ConvertedParticipant[];
 }) {
 
 	const { canvasWidth, canvasHeight } = canvasParams;
@@ -39,6 +42,7 @@ export function composeOverlay({
 	const { color: textColor, font: textFont } = textParams;
 
 	for (let i = 0; i < participants; i += 1) {
+		const playerStat : ConvertedParticipant = playerStats[i];
 		const verticalOffset = -30;
 		const trackPosition = (canvasHeight / 2) + verticalOffset + (i * ( 
 			(canvasHeight / 2 - 50)
@@ -66,6 +70,7 @@ export function composeOverlay({
 		});
 
 		/* [ Render pfp avatar ] */
+		const { pfp = DEFAULTS.pfp } : { pfp : number } = playerStat;
 		const avatarOffset = 5;
 		const avatarImage = loadImage(avatar);
 		const avatarCoordinate = {
@@ -75,7 +80,7 @@ export function composeOverlay({
 		const requestAvatar = requestFrame({
 			image: avatarImage,
 			framesCount: 7,
-			frame: 1,
+			frame: pfp,
 		})
 
 		fillStatic({

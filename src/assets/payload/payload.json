@@ -31,6 +31,7 @@
     ],
     "participants": [
         {
+            "id": "1",
             "playerId": "111111",
             "nickname": "Blue player",
             "horseColor": "#007da8",
@@ -60,6 +61,7 @@
             ]
         },
         {
+            "id": "2",
             "playerId": "222222",
             "nickname": "Red player",
             "horseColor": "#a80500",
@@ -83,6 +85,7 @@
             ]
         },
         {
+            "id": "3",
             "playerId": "333333",
             "nickname": "Green player",
             "horseColor": "#15a800",
@@ -106,6 +109,7 @@
             ]
         },
         {
+            "id": "4",
             "playerId": "444444",
             "nickname": "Yellow player",
             "horseColor": "#dde727",
@@ -129,6 +133,7 @@
             ]
         },
         {
+            "id": "5",
             "playerId": "555555",
             "nickname": "Magenta player",
             "horseColor": "#f738f4",
@@ -152,6 +157,7 @@
             ]
         },
         {
+            "id": "6",
             "playerId": "666666",
             "nickname": "Brown player",
             "horseColor": "#6c5101",
@@ -175,6 +181,7 @@
             ]
         },
         {
+            "id": "7",
             "playerId": "777777",
             "nickname": "Gray player",
             "horseColor": "#808080",
@@ -198,6 +205,7 @@
             ]
         },
         {
+            "id": "7",
             "playerId": "888888",
             "nickname": "White player",
             "horseColor": "#f6f6f1",

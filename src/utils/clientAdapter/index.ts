@@ -177,6 +177,7 @@ export function convertPlayerData({ payload }: { payload: PayloadInterface }) {
 		_player: PayloadParticipant,
 	) {
 		const {
+			id,
 			playerId,
 			nickname,
 			horseColor,
@@ -190,6 +191,11 @@ export function convertPlayerData({ payload }: { payload: PayloadInterface }) {
 		} = _player;
 
 		const { errors = [] } = acc;
+
+		const { error: idError, value: convertedId } = toNumber({
+			value: id,
+			type: 'id',
+		});
 		const { error: playerIdError, value: convertedPlayerId } = toNumber({
 			value: playerId,
 			type: 'playerId',
@@ -231,6 +237,7 @@ export function convertPlayerData({ payload }: { payload: PayloadInterface }) {
 		});
 
 		const errorCollection = [
+			idError,
 			playerIdError,
 			nicknameError,
 			horseColorError,
@@ -251,6 +258,7 @@ export function convertPlayerData({ payload }: { payload: PayloadInterface }) {
 		return {
 			errors: errors,
 			items: acc.items.concat({
+				id: convertedId,
 				playerId: convertedPlayerId,
 				nickname: convertedNickname,
 				horseColor: convertedHorseColor,

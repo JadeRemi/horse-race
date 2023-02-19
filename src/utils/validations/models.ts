@@ -208,7 +208,10 @@ export interface IParallaxDisplay {
 		top: ImageInterface;
 		bottom: ImageInterface;
 	},
-	border: ImageInterface;
+	border: {
+		top: ImageInterface;
+		bottom: ImageInterface;
+	},
 }
 
 export interface IActorsDisplay {
@@ -273,4 +276,22 @@ export interface TDefaults {
 	players: ConvertedParticipant[],
 	obstacles: ConvertedObstacle[],
 	pfp: number,
+	debugBGColor: string,
 }
+
+// Top section: 
+// [ top align ]
+// [ bottom align ]
+// Bottom section: 
+// [ top align ]
+// [ bottom align ]
+export type ISectionAlign = 'top' | 'bottom';
+
+export interface ITile {
+	tile: ImageInterface,
+	height?: number,
+	offset?: number,
+	section?: ISectionAlign,
+	align?: ISectionAlign,
+}
+

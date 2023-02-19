@@ -37,15 +37,19 @@ export function composeOverlay({
 	const { canvasWidth, canvasHeight } = canvasParams;
 	if (canvasWidth <= 0 || canvasHeight <= 0) return;
 	if (participants <= 0) return;
-	//const preciseTick = timestamp / (1000 / (fps * focusSpeed));
+
 	const { rating, avatar } = overlay;
 	const { color: textColor, font: textFont } = textParams;
 
 	for (let i = 0; i < participants; i += 1) {
 		const playerStat : ConvertedParticipant = playerStats[i];
-		const verticalOffset = -30;
+
+		const canvasSection = canvasHeight / 2;
+		const verticalOffsetCoef = 12;
+		const verticalOffset = canvasSection / 100 * verticalOffsetCoef;
+
 		const trackPosition = (canvasHeight / 2) + verticalOffset + (i * ( 
-			(canvasHeight / 2 - 50)
+			( canvasSection - (canvasSection / 100 * 30))
 			/ participants));
 
 		/* [ Render rating GUI ] */

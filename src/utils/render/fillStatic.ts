@@ -22,7 +22,7 @@ export function fillStatic({
     source: ISource,
     image: HTMLImageElement;
     coordinate: CoordinateInterface;
-    request: IFrameRequest | undefined;
+    request?: IFrameRequest | undefined;
     fitTo?: IFitTo;
     viaPhantom?: boolean;
     phantomParams?: IPhantomParams;

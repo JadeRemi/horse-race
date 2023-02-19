@@ -27,17 +27,18 @@ import OBSTACLE_MINE from '../../assets/images/actor/obstacle_mine.png';
 import OBSTACLE_POISON from '../../assets/images/actor/obstacle_poison_bubble.png';
 
 // [TILES]
-import FENCE_DIRT_TOP from '../../assets/images/background/fence/fence_dirt_1.png';
-import FENCE_DIRT_BOTTOM from '../../assets/images/background/fence/fence_dirt_2.png';
-import FENCE_GRASS_TOP from '../../assets/images/background/fence/fence_grass_1.png';
-import FENCE_GRASS_BOTTOM from '../../assets/images/background/fence/fence_grass_2.png';
-import BORDER_GRASS from '../../assets/images/background/fence/fence_grass.png';
-import BORDER_SAND from '../../assets/images/background/fence/fence_sand.png';
+import FENCE_WOOD from '../../assets/images/background/fence/fence_wood.png';
+import FENCE_METAL from '../../assets/images/background/fence/fence_metal.png';
+import BORDER_GRASS_TOP from '../../assets/images/background/fence/border_grass_top.png';
+import BORDER_GRASS_BOTTOM from '../../assets/images/background/fence/border_grass_bottom.png';
+import BORDER_SAND_TOP from '../../assets/images/background/fence/border_sand_top.png';
+import BORDER_SAND_BOTTOM from '../../assets/images/background/fence/border_sand_bottom.png';
 
 import BACK_DUNES from '../../assets/images/background/sky/back_dunes.png';
 import BACK_ROCKS from '../../assets/images/background/sky/back_rocks.png';
 import BACK_SKY from '../../assets/images/background/sky/back_sky.png';
 
+import TRACKS from '../../assets/images/background/track/tracks.png';
 import TRACK_DIRT from '../../assets/images/background/track/track_dirt.png';
 import TRACK_GRASS from '../../assets/images/background/track/track_grass.png';
 import TRACK_SAND from '../../assets/images/background/track/track_sand.png';
@@ -154,23 +155,23 @@ const ACTORS = {
 };
 
 const TILES = {
-	FENCE_DIRT_TOP: {
-		path: FENCE_DIRT_TOP,
+	FENCE_WOOD: {
+		path: FENCE_WOOD,
 	},
-	FENCE_DIRT_BOTTOM: {
-		path: FENCE_DIRT_BOTTOM,
+	FENCE_METAL: {
+		path: FENCE_METAL,
 	},
-	FENCE_GRASS_TOP: {
-		path: FENCE_GRASS_TOP,
+	BORDER_GRASS_TOP: {
+		path: BORDER_GRASS_TOP,
 	},
-	FENCE_GRASS_BOTTOM: {
-		path: FENCE_GRASS_BOTTOM,
+	BORDER_GRASS_BOTTOM: {
+		path: BORDER_GRASS_BOTTOM,
 	},
-	BORDER_GRASS: {
-		path: BORDER_GRASS,
+	BORDER_SAND_TOP: {
+		path: BORDER_SAND_TOP,
 	},
-	BORDER_SAND: {
-		path: BORDER_SAND,
+	BORDER_SAND_BOTTOM: {
+		path: BORDER_SAND_BOTTOM,
 	},
 	BACK_DUNES: {
 		path: BACK_DUNES,
@@ -180,6 +181,10 @@ const TILES = {
 	},
 	BACK_SKY: {
 		path: BACK_SKY,
+	},
+	TRACKS: {
+		frames: 4,
+		path: TRACKS,
 	},
 	TRACK_DIRT: {
 		path: TRACK_DIRT,

@@ -46,20 +46,24 @@ export function composeActors({
 		y: canvasHeight / 2,
 	};
 
-	const verticalOffset = -30;
+	const canvasSection = canvasHeight / 2;
+	const verticalOffsetCoef = 4;
+	const verticalOffset = canvasSection / 100 * verticalOffsetCoef;
 
 	for (let i = 0; i < participants; i += 1) {
 		const trackPosition = y + verticalOffset + (i * ( 
-			(canvasHeight / 2 - 50)
+			( canvasSection - (canvasSection / 100 * 30))
 			/ participants));
 
 		const playerStat : ConvertedParticipant = playerStats[i];
 		const {
 			horseColor,
 			jockeyColor,
+			speed,
 		} : {
 			horseColor: string,
 			jockeyColor: string,
+			speed: number,
 		} = playerStat;
 
 		//const { horseColor, jockeyColor } : { horseColor?: string, jockeyColor?: string } = phantomColor;

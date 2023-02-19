@@ -231,6 +231,7 @@ export function convertPlayerData({ payload }: { payload: PayloadInterface }) {
 		const { error: speedError, value: convertedSpeed } = toNumber({
 			value: speed,
 			type: 'speed',
+			precise: true,
 		});
 		const { errors: pathErrors, value: convertedPath } = convertPath({
 			_path: path,

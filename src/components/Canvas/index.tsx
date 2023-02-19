@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import { ErrorBoundary } from '../Error/errorBoundary'
 
-import { Canvas as CanvasBlock, Wrapper, Text, Container, Button, Bar } from './styled';
+import { Canvas as CanvasBlock, Wrapper, Text, Container, Button, Bar, Debug, Row, ButtonText } from './styled';
 import { loadPlayerData, loadSettings, loadStats } from '../../utils/clientAdapter';
 import { useImage } from '../../utils/hooks/useImage';
 import { useCanvas } from '../../utils/hooks/useCanvas';
@@ -103,23 +103,45 @@ export function Canvas() {
         //return () => clearInterval(interval.current);
     }, []);
 
+    function debugStats() {
+        return (
+            <Bar>
+                <Row>
+                    <Text>Players:</Text><Text>{ participants }</Text>
+                </Row>
+                <Row>
+                    <Text>Total time:</Text><Text>{ duration }</Text>
+                </Row>
+                <Row>
+                    <Text>Total length:</Text><Text>{ length }</Text>
+                </Row>
+                <Row>
+                    <Text>Biome:</Text><Text>{ biome }</Text>
+                </Row>
+                <Row>
+                    <Text>Main player:</Text><Text>{ focused }</Text>
+                </Row>
+                <Row>
+                    <Text>Start tick:</Text><Text>{ start }</Text>
+                </Row>
+            </Bar>
+        )
+    }
+
     return (
         <ErrorBoundary>
             <Wrapper className="canvas-wrapper">
                 <Container>
-                    <Bar>
-                        { true &&
-                            <Text>
-                            { participants } { duration } { length } { biome } { focused }
-                            { start }
-                        </Text>
-                        }
+                    <Debug>
                         <Button
                             onClick={toggleAnimate}
                         >
-                            Animate: {animate ? DEFAULT_NAMES.YES : DEFAULT_NAMES.NO}
+                            <ButtonText>
+                                Animate: {animate ? DEFAULT_NAMES.YES : DEFAULT_NAMES.NO}
+                            </ButtonText>
                         </Button>
-                    </Bar>
+                        {debugStats()}
+                    </Debug>
                     <CanvasBlock
                         className="canvas"
                         width={canvaswidth}

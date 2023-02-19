@@ -4,7 +4,7 @@
 	"framesPerSecond": 30,
 	"animate": true,
 	"parallaxSpeed": 10,
-	"cycleSpeed": 3,
+	"cycleSpeed": 2,
 	"backgroundPalette": "#27c7e1",
 	"focusSpeed": 8,
 	"textColor": "#FFFFFF",

@@ -3,11 +3,16 @@ import { displayError } from '../validations/errors';
 export function toNumber({
     value,
     type,
+    precise = false,
 } : {
     value: string,
     type: string,
+    precise?: boolean,
 }) {
-    const newValue = parseInt((value?.toString()), 10);
+    const parseValue = value?.toString()
+    const newValue = precise
+        ? parseFloat(parseValue)
+        : parseInt(parseValue, 10);
 
     const error: string = !value
         || value.length <= 0
@@ -57,14 +62,14 @@ export function toBoolean({
 }) {
     const parseValue = value?.toString();
 
-    const newValue = value === 'true'
+    const newValue = parseValue === 'true'
         ? true
-        : value === 'false'
+        : parseValue === 'false'
             ? false
             : undefined;
 
-    const error: string = !value
-        || (value !== 'false' && value !== 'true')
+    const error: string = !parseValue
+        || (parseValue !== 'false' && parseValue !== 'true')
         ? displayError({
                 context: 'conversion',
                 source: type,

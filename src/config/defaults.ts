@@ -22,6 +22,7 @@ export const DEFAULTS : TDefaults = {
 	players: [],
 	obstacles: [],
 	pfp: 1,
+	debugBGColor: '#3b3834',
 };
 
 export const DEFAULT_NAMES = {

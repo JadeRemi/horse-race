@@ -13,11 +13,16 @@ export function fillText({
     text: string,
     color: string,
 }){
-    const fontSize = '20';
+    const fontSize = '14';
 
 	ctx.font = `${fontSize}px ${font}`;
 	ctx.textAlign = "start";
     ctx.textBaseline = "bottom";
+
+    ctx.strokeStyle = 'black';
+    ctx.lineWidth = 3;
+    ctx.strokeText(text, x, y);
+
 	ctx.fillStyle = color;
 	ctx.fillText(text, x, y);
 }

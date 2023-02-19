@@ -8,6 +8,7 @@ import {
 	ISource,
 	ConvertedParticipant,
 	ConvertedObstacle,
+	IParallaxDisplay,
 } from '../validations/models';
 import { default as DICTIONARY } from '../../utils/image/assetDictionary';
 import { DEFAULTS } from '../../config/defaults';
@@ -36,17 +37,20 @@ export function draw({
 	replay: ReplayInterface | null;
 	stats: { players: ConvertedParticipant[], obstacles: ConvertedObstacle[] }
 }) {
-	//const { phantom } : { phantom: HTMLCanvasElement | null } = source;
-	const layout = {
-		track: DICTIONARY.TILES.TRACK_DIRT,
+
+	const layout : IParallaxDisplay = {
+		track: DICTIONARY.TILES.TRACK_GRASS,
 		sky: DICTIONARY.TILES.BACK_SKY,
 		skyline: DICTIONARY.TILES.BACK_ROCKS,
 		landscape: DICTIONARY.TILES.BACK_DUNES,
 		fence: { 
-			top: DICTIONARY.TILES.FENCE_GRASS_TOP,
-			bottom: DICTIONARY.TILES.FENCE_GRASS_BOTTOM,
+			top: DICTIONARY.TILES.FENCE_WOOD,
+			bottom: DICTIONARY.TILES.FENCE_METAL,
 		},
-		border: DICTIONARY.TILES.BORDER_GRASS,
+		border: {
+			top: DICTIONARY.TILES.BORDER_GRASS_TOP,
+			bottom: DICTIONARY.TILES.BORDER_GRASS_BOTTOM,
+		},
 
 	};
 	const actors = {
@@ -116,6 +120,7 @@ export function draw({
 			canvasHeight,
 		},
 		focusSpeed,
+		participants,
 	});
 	composeActors({
 		source,

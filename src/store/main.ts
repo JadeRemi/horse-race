@@ -23,6 +23,8 @@ const initialState = RootModel.create({
 		length: DEFAULTS.length,
 		biome: DEFAULTS.biome,
 		focused: DEFAULTS.focused,
+		lastBreakpoint: DEFAULTS.lastBreakpoint,
+		timeRecord: DEFAULTS.timeRecord,
 	},
 	settings: {
 		width: DEFAULTS.width,

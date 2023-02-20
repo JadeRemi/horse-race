@@ -19,6 +19,7 @@ export function composeParallax({
 	canvasParams,
 	focusSpeed,
 	participants,
+	startFinishSeq = false,
 }: {
 	source: ISource;
 	parallax: IParallaxDisplay;
@@ -28,6 +29,7 @@ export function composeParallax({
 	canvasParams: ICanvasParams;
 	focusSpeed: number;
 	participants: number;
+	startFinishSeq?: boolean;
 }) {
 	const { ctx } = source;
 	const { canvasWidth, canvasHeight } = canvasParams;
@@ -182,7 +184,9 @@ export function composeParallax({
 		const calculatedLength = calculatedHeight
 			? length * (calculatedHeight / height)
 			: length;
-		const offset = Math.ceil(preciseTick % (calculatedLength * slowdown));
+		const offset = startFinishSeq
+			? 0
+			: Math.ceil(preciseTick % (calculatedLength * slowdown));
 
 		const { x, y }: CoordinateInterface = {
 			x: 0,
@@ -217,12 +221,10 @@ export function composeParallax({
 
 		for (let i = +x; i <= canvasWidth + calculatedLength; i += calculatedLength) {
 			const coordinateX = (i - (offset / slowdown));
-			//ctx.drawImage(image, coordinateX, y, length, height);
 			fillStatic({
 				source,
 				image,
 				coordinate: { x: coordinateX, y: coordinateY },
-				//fitTo: { height: canvasHeight / 2}
 				...(!!calculatedHeight && {
 					fitTo: { height: calculatedHeight }
 				}),

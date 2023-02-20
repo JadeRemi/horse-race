@@ -98,7 +98,8 @@ export function draw({
 		return player?.id === focused;
 	}
 
-	const focusSpeed = players.find(mainPlayer)?.speed || DEFAULTS.focusSpeed
+	const focusSpeed = players.find(mainPlayer)?.speed || DEFAULTS.focusSpeed;
+	const startFinishSeq = true;
 
 
 	fillBackground({
@@ -121,6 +122,7 @@ export function draw({
 		},
 		focusSpeed,
 		participants,
+		startFinishSeq,
 	});
 	composeActors({
 		source,
@@ -136,6 +138,7 @@ export function draw({
 		participants,
 		obstacles,
 		playerStats: players,
+		startFinishSeq,
 	});
 	composeOverlay({
 		source,

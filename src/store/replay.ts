@@ -7,6 +7,8 @@ export const Replay = types
     length: types.number,
     biome: types.string,
     focused: types.number,
+    lastBreakpoint: types.number,
+    timeRecord: types.number,
   })
   .actions(self => ({
     setPlayerData({
@@ -28,4 +30,14 @@ export const Replay = types
       self.biome = biome;
       self.focused = focused;
     },
+    setDelta({
+      lastBreakpoint,
+      timeRecord,
+    } : {
+      lastBreakpoint?: number,
+      timeRecord?: number,
+    }) {
+      if (lastBreakpoint) self.lastBreakpoint = lastBreakpoint;
+      if (timeRecord) self.timeRecord = timeRecord;
+    }
   }));

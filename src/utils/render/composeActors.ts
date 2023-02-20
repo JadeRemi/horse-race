@@ -20,6 +20,7 @@ export function composeActors({
 	participants,
 	obstacles,
 	playerStats,
+	startFinishSeq = false,
 }: {
 	source: ISource;
 	timestamp: number;
@@ -31,6 +32,7 @@ export function composeActors({
 	participants: number;
 	obstacles: ConvertedObstacle[],
 	playerStats: ConvertedParticipant[],
+	startFinishSeq?: boolean,
 }) {
 
 	const { canvasWidth, canvasHeight } = canvasParams;

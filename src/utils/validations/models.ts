@@ -277,6 +277,8 @@ export interface TDefaults {
 	obstacles: ConvertedObstacle[],
 	pfp: number,
 	debugBGColor: string,
+	lastBreakpoint: number,
+	timeRecord: number,
 }
 
 // Top section: 

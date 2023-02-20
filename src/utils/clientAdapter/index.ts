@@ -1,17 +1,14 @@
 import PAYLOAD from '../../assets/payload/payload.json';
 import CONFIG from '../../config/canvas.json';
-import { useStateTree } from '../../store/main';
 import {
 	PayloadInterface,
 	PayloadSettings,
 	PayloadObstacle,
 	PayloadPath,
 	PayloadParticipant,
-	ConvertedSettings,
 	ConvertedObstacle,
 	ConvertedPath,
 	ConvertedParticipant,
-	ConvertedInterface,
 } from '../validations/models';
 import { toString, toNumber, toBoolean } from '../validations/conversions';
 import { collectErrors } from '../validations/errors';

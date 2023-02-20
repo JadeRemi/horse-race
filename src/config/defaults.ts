@@ -23,6 +23,8 @@ export const DEFAULTS : TDefaults = {
 	obstacles: [],
 	pfp: 1,
 	debugBGColor: '#3b3834',
+	lastBreakpoint: 0,
+	timeRecord: 0,
 };
 
 export const DEFAULT_NAMES = {

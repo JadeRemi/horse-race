@@ -21,12 +21,13 @@ import CONFIG from '../../config/canvas.json';
 export function Canvas() {
     const canvasBlock = useRef<HTMLCanvasElement | null>(null);
     const phantomBlock = useRef<HTMLCanvasElement | null>(null);
-    const [start, setStart] = useState(0);
     const { width: windowWidth, height: windowHeight } : { width: number, height : number } = useWindowSize();
 
     const { replay, settings, stats } = useStateTree();
-    const { participants, duration, length, biome, focused } : {
-        participants: number, duration: number, length: number, biome: string, focused: number
+    const [ currentDelta, setCurrentDelta ] = useState(0);
+    const { participants, duration, length, biome, focused, lastBreakpoint, timeRecord } : {
+        participants: number, duration: number, length: number, biome: string, focused: number,
+        lastBreakpoint: number, timeRecord: number,
     } = replay;
     const { width: canvaswidth, height: canvasHeight, animate } : {
         width: number, height: number, animate: boolean
@@ -34,11 +35,10 @@ export function Canvas() {
 
     const fps = DEFAULTS.framesPerSecond;
 
-    const frameDuration = 1000 / fps;
-
     function markStart() {
-        const timestamp = Date.now();
-        setStart(timestamp);
+        replay.setDelta({
+            lastBreakpoint: Date.now(),
+        });
     }
 
     function reduceDictionary(acc : string[], graphic : IImage) : string[] {
@@ -63,7 +63,24 @@ export function Canvas() {
     const { graphicsLoaded } = useImageLoader(pathList);
 
     function toggleAnimate() {
-        if (!animate) window.requestAnimationFrame(loopDraw);
+        const dateNow = Date.now();
+        if (!animate) {
+
+            replay.setDelta({
+                lastBreakpoint: dateNow,
+            });
+
+            window.requestAnimationFrame(loopDraw);
+        } else {
+            if (replay.lastBreakpoint > 0) {
+                replay.setDelta({
+                    lastBreakpoint: dateNow,
+                    timeRecord: dateNow - replay.lastBreakpoint + replay.timeRecord,
+                });
+            }
+        }
+
+
 
         settings.setAnimate({
             animate: !animate,
@@ -75,6 +92,7 @@ export function Canvas() {
     function loopDraw() {
         const ctx = canvasBlock.current.getContext('2d');
         const { animate: innerLoopAnimate } = settings;
+        setCurrentDelta(Date.now() - replay.lastBreakpoint + replay.timeRecord);
 
         draw({
             source: {
@@ -122,7 +140,13 @@ export function Canvas() {
                     <Text>Main player:</Text><Text>{ focused }</Text>
                 </Row>
                 <Row>
-                    <Text>Start tick:</Text><Text>{ start }</Text>
+                    <Text>Last pause:</Text><Text>{ replay.lastBreakpoint }</Text>
+                </Row>
+                <Row>
+                    <Text>Time record:</Text><Text>{ replay.timeRecord }</Text>
+                </Row>
+                <Row>
+                    <Text>Time now:</Text><Text>{ currentDelta }</Text>
                 </Row>
             </Bar>
         )

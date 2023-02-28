@@ -13,29 +13,20 @@ import {
 import { default as DICTIONARY } from '../../utils/image/assetDictionary';
 import { DEFAULTS } from '../../config/defaults';
 
-const RESOURCES = {
-	img1: {
-		path: 'https://user-images.githubusercontent.com/85193527/205502147-169e1604-29a5-49eb-a797-1f7b84cfae33.svg',
-		speed: 3,
-		frames: 14,
-	},
-	img2: {
-		path: 'https://user-images.githubusercontent.com/85193527/205508448-20cba659-7c06-4ed1-95a3-0775162ed7ee.png',
-	},
-};
-
 export function draw({
 	source,
 	canvas,
 	settings,
 	replay,
 	stats,
+	timestamp,
 }: {
 	source: ISource;
 	canvas: HTMLCanvasElement | null;
 	settings: SettingsInterface | null;
 	replay: ReplayInterface | null;
-	stats: { players: ConvertedParticipant[], obstacles: ConvertedObstacle[] }
+	stats: { players: ConvertedParticipant[], obstacles: ConvertedObstacle[] };
+	timestamp: number;
 }) {
 
 	const layout : IParallaxDisplay = {
@@ -65,27 +56,26 @@ export function draw({
 	}
 
 	const fps = DEFAULTS.framesPerSecond;
-	const timestamp = Date.now();
+	//const timestamp = Date.now();
 	const { width: canvasWidth, height: canvasHeight } = canvas;
 	const {
 		backgroundPalette,
-		//focusSpeed,
 		parallaxSpeed,
 		cycleSpeed,
 		textColor,
 		textFont,
 	}: {
 		backgroundPalette: string;
-		//focusSpeed: number;
 		parallaxSpeed: number;
 		cycleSpeed: number;
 		textColor: string;
 		textFont: string;
 	} = settings;
 
-	const { participants, focused } : {
+	const { participants, focused, duration } : {
         participants: number,
 		focused: number,
+		duration: number,
     } = replay;
 
 	const {
@@ -99,7 +89,7 @@ export function draw({
 	}
 
 	const focusSpeed = players.find(mainPlayer)?.speed || DEFAULTS.focusSpeed;
-	const startFinishSeq = true;
+	const startFinishSeq = false;
 
 
 	fillBackground({
@@ -139,6 +129,7 @@ export function draw({
 		obstacles,
 		playerStats: players,
 		startFinishSeq,
+		duration,
 	});
 	composeOverlay({
 		source,

@@ -92,7 +92,8 @@ export function Canvas() {
     function loopDraw() {
         const ctx = canvasBlock.current.getContext('2d');
         const { animate: innerLoopAnimate } = settings;
-        setCurrentDelta(Date.now() - replay.lastBreakpoint + replay.timeRecord);
+        const newDelta = Date.now() - replay.lastBreakpoint + replay.timeRecord;
+        setCurrentDelta(newDelta);
 
         draw({
             source: {
@@ -105,6 +106,7 @@ export function Canvas() {
             settings,
             replay,
             stats,
+            timestamp: newDelta,
         });
 
         if (innerLoopAnimate) window.requestAnimationFrame(loopDraw);

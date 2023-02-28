@@ -25,6 +25,7 @@ export const DEFAULTS : TDefaults = {
 	debugBGColor: '#3b3834',
 	lastBreakpoint: 0,
 	timeRecord: 0,
+	pixelsPerMapUnit: 16,
 };
 
 export const DEFAULT_NAMES = {

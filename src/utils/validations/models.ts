@@ -106,7 +106,7 @@ export interface ConvertedObstacle {
 
 export interface ConvertedPath {
 	break: number;
-	obstacle?: string;
+	obstacle?: number;
 	pass?: boolean;
 	curve: string;
 }
@@ -279,6 +279,7 @@ export interface TDefaults {
 	debugBGColor: string,
 	lastBreakpoint: number,
 	timeRecord: number,
+	pixelsPerMapUnit: number,
 }
 
 // Top section: 

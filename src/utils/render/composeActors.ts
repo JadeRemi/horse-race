@@ -7,7 +7,9 @@ import {
 	IActorsDisplay,
 	ConvertedObstacle,
 	ConvertedParticipant,
+	ConvertedPath,
 } from '../validations/models';
+import { DEFAULTS } from '../../config/defaults';
 
 export function composeActors({
 	source,
@@ -21,6 +23,7 @@ export function composeActors({
 	obstacles,
 	playerStats,
 	startFinishSeq = false,
+	duration
 }: {
 	source: ISource;
 	timestamp: number;
@@ -33,6 +36,7 @@ export function composeActors({
 	obstacles: ConvertedObstacle[],
 	playerStats: ConvertedParticipant[],
 	startFinishSeq?: boolean,
+	duration: number,
 }) {
 
 	const { canvasWidth, canvasHeight } = canvasParams;
@@ -40,11 +44,15 @@ export function composeActors({
 	if (canvasWidth <= 0 || canvasHeight <= 0) return;
 	if (participants <= 0) return;
 
-	const preciseTick = timestamp / (1000 / (fps * focusSpeed));
+	const pixelFocusSpeed = DEFAULTS.pixelsPerMapUnit * focusSpeed;
+	const preciseTick = timestamp / (1000 / (fps * pixelFocusSpeed));
+	const preciseSecond =  preciseTick / 10;
 
 	const { horse, jockey, shadow, obstacle } = actors;
 	const { x, y } = {
-		x: canvasWidth / 2,
+		x: startFinishSeq
+			? canvasWidth / 2///////// TODO
+			: canvasWidth / 2,
 		y: canvasHeight / 2,
 	};
 
@@ -62,10 +70,12 @@ export function composeActors({
 			horseColor,
 			jockeyColor,
 			speed,
+			path,
 		} : {
 			horseColor: string,
 			jockeyColor: string,
 			speed: number,
+			path : ConvertedPath[],
 		} = playerStat;
 
 		//const { horseColor, jockeyColor } : { horseColor?: string, jockeyColor?: string } = phantomColor;
@@ -73,10 +83,11 @@ export function composeActors({
 		const horseImage = loadImage(horse);
 		const { frames : horseFrames = 1 } : { frames?: number } = horse;
 		const centerActorOffset = horseImage.width / horseFrames / 2 || 0;
+		const deltaSpeedOffset = (focusSpeed - speed) * DEFAULTS.pixelsPerMapUnit * preciseSecond || 0;
 		const horseCoordinate = {
-			x: x - centerActorOffset,
+			x: x - centerActorOffset - deltaSpeedOffset,
 			y: trackPosition,
-		}
+		};
 		
 		const jockeyImage = loadImage(jockey);
 		const { frames : jockeyFrames = 1 } : { frames?: number } = jockey;
@@ -84,64 +95,85 @@ export function composeActors({
 		const { frames : shadowFrames = 1 } : { frames?: number } = shadow;
 		const jockeyOffset = 8;
 		const jockeyCoordinate = {
-			x: x - centerActorOffset,
+			x: x - centerActorOffset - deltaSpeedOffset,
 			y: trackPosition + jockeyOffset,
 		}
 
-		const obstacleImage = loadImage(obstacle);
-		const obstacleRange = 800;
-		const obstacleOffset = Math.ceil(preciseTick % obstacleRange);
-		const obstacleCoordinate = {
-			x: x - centerActorOffset - obstacleOffset + obstacleRange/2,
-			y: trackPosition + jockeyOffset,
+		if ( horseCoordinate.x < canvasWidth && (horseCoordinate.x + horseImage?.width / horseFrames) > 0) {
+
+			fillAnimation({
+				source,
+				image: shadowImage,
+				coordinate: jockeyCoordinate,
+				timestamp,
+				fps,
+				cycleSpeed,
+				imageFrames: shadowFrames,
+			});
+	
+			fillAnimation({
+				source,
+				image: horseImage,
+				coordinate: horseCoordinate,
+				timestamp,
+				fps,
+				cycleSpeed,
+				imageFrames: horseFrames,
+				viaPhantom: true,
+				phantomParams: { ...phantomParams, phantomColor: horseColor },
+			});
+	
+			fillAnimation({
+				source,
+				image: jockeyImage,
+				coordinate: jockeyCoordinate,
+				timestamp,
+				fps,
+				cycleSpeed,
+				imageFrames: jockeyFrames,
+				viaPhantom: true,
+				phantomParams: { ...phantomParams, phantomColor: jockeyColor },
+			});
+
 		}
 
-		fillAnimation({
-			source,
-			image: shadowImage,
-			coordinate: jockeyCoordinate,
-			timestamp,
-			fps,
-			cycleSpeed,
-			imageFrames: shadowFrames,
-		});
+		path.forEach((item : ConvertedPath) => {
 
-		fillAnimation({
-			source,
-			image: horseImage,
-			coordinate: horseCoordinate,
-			timestamp,
-			fps,
-			cycleSpeed,
-			imageFrames: horseFrames,
-			viaPhantom: true,
-			phantomParams: { ...phantomParams, phantomColor: horseColor },
-		});
+			const  { break: breakPoint, obstacle: obstacleType, pass } : { break: number, obstacle?: number, pass?: boolean } = item;
+			if (!obstacleType) return;
 
-		fillAnimation({
-			source,
-			image: jockeyImage,
-			coordinate: jockeyCoordinate,
-			timestamp,
-			fps,
-			cycleSpeed,
-			imageFrames: jockeyFrames,
-			viaPhantom: true,
-			phantomParams: { ...phantomParams, phantomColor: jockeyColor },
-		});
+			const obstacleImage = loadImage(obstacle);
+			const obstacleRange = breakPoint * DEFAULTS.pixelsPerMapUnit;
+			const obstacleOffset = Math.ceil(preciseTick % duration);
+			const coordinateX = x - centerActorOffset - obstacleOffset + obstacleRange;
 
-		const requestObstacle = requestFrame({
-			image: obstacleImage,
-			framesCount: 2,
-			frame: 1,
-	   })
+			const { width: obstacleWidth } = obstacleImage;
 
-	   	fillStatic({
-			source,
-			image: obstacleImage,
-			coordinate: obstacleCoordinate,
-			request: requestObstacle,
-	   	});
+			if (coordinateX > canvasWidth || coordinateX + obstacleWidth < 0) return;
+			
+			const obstacleCoordinate = {
+				x: coordinateX,
+				y: trackPosition,
+			}
+			const requestObstacle = requestFrame({
+				image: obstacleImage,
+				framesCount: 2,
+				frame: 1,
+		   })
+	
+			   fillStatic({
+				source,
+				image: obstacleImage,
+				coordinate: obstacleCoordinate,
+				request: requestObstacle,
+			   });
+
+		})
+
+		//const obstableMap = path.reduce(reducePath, {});
+
+
+
 
 		// fillAnimation({
 		// 	source,

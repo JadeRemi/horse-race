@@ -1,3 +1,4 @@
+import { DEFAULTS } from '../../config/defaults';
 import { loadImage, requestFrame } from '../image/loadImage';
 import {
 	ImageInterface,
@@ -34,7 +35,7 @@ export function composeParallax({
 	const { ctx } = source;
 	const { canvasWidth, canvasHeight } = canvasParams;
 	if (canvasWidth <= 0 || canvasHeight <= 0) return;
-	const preciseTick = timestamp / (1000 / (fps * focusSpeed));
+	const preciseTick = timestamp / (1000 / (fps * focusSpeed * DEFAULTS.pixelsPerMapUnit));
 	const { track, sky, skyline, landscape, border: {
 		top: borderTop, bottom: borderBottom,
 	}, fence: {
@@ -64,14 +65,7 @@ export function composeParallax({
 			}
 		}
 	);
-	
-	// [{
-	// 	tile: track,
-	// 	section: 'bottom',
-	// 	align: 'top',
-	// 	height: 70,
-	// 	offset: 15,
-	// }, ]
+
 	const iterableTiles : ITile[] = [ {
 			tile: sky,
 			section: 'top',

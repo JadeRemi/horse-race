@@ -306,7 +306,7 @@ export function convertPlayerData({ payload }: { payload: PayloadInterface }) {
 			type: 'curve',
 		});
 		const { error: obstacleError = null, value: convertedObstacle = null } =
-			obstacle ? toString({ value: obstacle, type: 'obstacle' }) : {};
+			obstacle ? toNumber({ value: obstacle, type: 'obstacle' }) : {};
 		const { error: passError = null, value: convertedPass = null } = pass
 			? toBoolean({ value: pass, type: 'pass' })
 			: {};
@@ -407,14 +407,6 @@ export function loadSettings({ settings }: { settings: ConfigContext }) {
 }
 
 export function loadStats({ stats }: { stats: StatContext }) {
-
-	// const {
-	// 	participants: players,
-	// 	obstacles,
-	// } : {
-	// 	participants: PayloadParticipant[];
-	// 	obstacles: PayloadObstacle[];
-	// } = CONFIG;
 
 	const { obstacles, participants: players } = convertPlayerData({
 		payload: PAYLOAD,

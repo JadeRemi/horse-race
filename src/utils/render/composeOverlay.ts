@@ -41,6 +41,20 @@ export function composeOverlay({
 	const { rating, avatar } = overlay;
 	const { color: textColor, font: textFont } = textParams;
 
+	function reduceToDistance(acc : number[], item : ConvertedParticipant) {
+		const pixelFocusSpeed = DEFAULTS.pixelsPerMapUnit * item.speed;
+		const preciseStep : number = (timestamp / 1000) * pixelFocusSpeed;
+		return acc.concat([ preciseStep ]);
+	}
+	const distanceComparison = playerStats.reduce(reduceToDistance, []);
+
+	function reduceToPosition(acc : number[], item : number) {
+		const position = distanceComparison.filter(x => x > item)?.length || 0;
+		return acc.concat([ position + 1 ]);
+	}
+
+	const positionComparison = distanceComparison.reduce(reduceToPosition, []);
+
 	for (let i = 0; i < participants; i += 1) {
 		const playerStat : ConvertedParticipant = playerStats[i];
 
@@ -74,7 +88,7 @@ export function composeOverlay({
 		});
 
 		/* [ Render pfp avatar ] */
-		const { pfp = DEFAULTS.pfp } : { pfp : number } = playerStat;
+		const { pfp = DEFAULTS.pfp, speed } : { pfp : number, speed : number } = playerStat;
 		const avatarOffset = 5;
 		const avatarImage = loadImage(avatar);
 		const avatarCoordinate = {
@@ -104,7 +118,8 @@ export function composeOverlay({
 			x: 0 + textOffset,
 			y: trackPosition + fontSize,
 		};
-		const textMessage = ordinal(i + 1) || DEFAULT_NAMES.UNKNOWN;
+		const playerPlace = positionComparison[i];
+		const textMessage = ordinal(playerPlace) || DEFAULT_NAMES.UNKNOWN;
 
 		fillText({
 			source,

@@ -8,7 +8,7 @@ const Obstacle = types.model({
 
 const Path = types.model({
   break: types.number,
-  obstacle: types.optional(types.string, ''),
+  obstacle: types.optional(types.number, 0),
   pass: types.optional(types.boolean, false),
   curve: types.string,
 });

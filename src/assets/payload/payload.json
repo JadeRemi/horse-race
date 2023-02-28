@@ -39,23 +39,23 @@
             "pfp": "1",
             "health": "150",
             "duration": "20000",
-            "place": "8",
-            "speed": "4.15",
+            "place": "2",
+            "speed": "0.315",
             "path": [
                 {
-                    "break": "1000",
+                    "break": "10",
                     "obstacle": "33",
                     "pass": "true",
                     "curve": ".17 .67 .83 .67"
                 },
                 {
-                    "break": "6000",
+                    "break": "60",
                     "obstacle": "22",
                     "pass": "true",
                     "curve": ".17 .67 .83 .67"
                 },
                 {
-                    "break": "20000",
+                    "break": "200",
                     "curve": ".17 .67 .83 .67"
                 }
             ]
@@ -70,16 +70,16 @@
             "health": "150",
             "duration": "15500",
             "place": "6",
-            "speed": "4.0",
+            "speed": "0.4",
             "path": [
                 {
-                    "break": "11000",
+                    "break": "110",
                     "obstacle": "22",
                     "pass": "true",
                     "curve": ".17 .67 .83 .67"
                 },
                 {
-                    "break": "15500",
+                    "break": "155",
                     "curve": ".17 .67 .83 .67"
                 }
             ]
@@ -93,17 +93,17 @@
             "pfp": "3",
             "health": "150",
             "duration": "17500",
-            "place": "7",
-            "speed": "3.9",
+            "place": "5",
+            "speed": "0.39",
             "path": [
                 {
-                    "break": "9000",
+                    "break": "90",
                     "obstacle": "11",
                     "pass": "true",
                     "curve": ".17 .67 .83 .67"
                 },
                 {
-                    "break": "17500",
+                    "break": "175",
                     "curve": ".17 .67 .83 .67"
                 }
             ]
@@ -118,16 +118,16 @@
             "health": "150",
             "duration": "1000",
             "place": "1",
-            "speed": "3.1",
+            "speed": "0.31",
             "path": [
                 {
-                    "break": "500",
+                    "break": "5",
                     "obstacle": "22",
                     "pass": "true",
                     "curve": ".17 .67 .83 .67"
                 },
                 {
-                    "break": "1000",
+                    "break": "10",
                     "curve": ".17 .67 .83 .67"
                 }
             ]
@@ -142,16 +142,16 @@
             "health": "150",
             "duration": "11500",
             "place": "3",
-            "speed": "3.8",
+            "speed": "0.38",
             "path": [
                 {
-                    "break": "10500",
+                    "break": "105",
                     "obstacle": "22",
                     "pass": "true",
                     "curve": ".17 .67 .83 .67"
                 },
                 {
-                    "break": "11500",
+                    "break": "115",
                     "curve": ".17 .67 .83 .67"
                 }
             ]
@@ -166,64 +166,16 @@
             "health": "150",
             "duration": "14500",
             "place": "4",
-            "speed": "3.4",
+            "speed": "0.34",
             "path": [
                 {
-                    "break": "8500",
+                    "break": "85",
                     "obstacle": "22",
                     "pass": "true",
                     "curve": ".17 .67 .83 .67"
                 },
                 {
-                    "break": "14500",
-                    "curve": ".17 .67 .83 .67"
-                }
-            ]
-        },
-        {
-            "id": "7",
-            "playerId": "777777",
-            "nickname": "Gray player",
-            "horseColor": "#808080",
-            "jockeyColor": "#6f8182",
-            "pfp": "7",
-            "health": "150",
-            "duration": "15000",
-            "place": "5",
-            "speed": "4.5",
-            "path": [
-                {
-                    "break": "6500",
-                    "obstacle": "11",
-                    "pass": "true",
-                    "curve": ".17 .67 .83 .67"
-                },
-                {
-                    "break": "15000",
-                    "curve": ".17 .67 .83 .67"
-                }
-            ]
-        },
-        {
-            "id": "7",
-            "playerId": "888888",
-            "nickname": "White player",
-            "horseColor": "#f6f6f1",
-            "jockeyColor": "#a8edf0",
-            "pfp": "1",
-            "health": "150",
-            "duration": "2500",
-            "place": "2",
-            "speed": "3.5",
-            "path": [
-                {
-                    "break": "1500",
-                    "obstacle": "11",
-                    "pass": "true",
-                    "curve": ".17 .67 .83 .67"
-                },
-                {
-                    "break": "2500",
+                    "break": "145",
                     "curve": ".17 .67 .83 .67"
                 }
             ]

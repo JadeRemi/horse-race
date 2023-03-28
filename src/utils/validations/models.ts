@@ -215,8 +215,10 @@ export interface IParallaxDisplay {
 }
 
 export interface IActorsDisplay {
-	horse: ImageInterface;
-	jockey: ImageInterface;
+	horseRun: ImageInterface;
+	horseJump: ImageInterface;
+	jockeyRun: ImageInterface;
+	jockeyJump: ImageInterface;
 	shadow: ImageInterface;
 	obstacle: ImageInterface;
 }
@@ -280,6 +282,7 @@ export interface TDefaults {
 	lastBreakpoint: number,
 	timeRecord: number,
 	pixelsPerMapUnit: number,
+	jumpProximity: number,
 }
 
 // Top section: 

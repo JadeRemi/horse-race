@@ -48,7 +48,11 @@ export function composeActors({
 	const preciseTick = timestamp / (1000 / (fps * pixelFocusSpeed));
 	const preciseSecond =  preciseTick / 10;
 
-	const { horse, jockey, shadow, obstacle } = actors;
+	const {
+		horseRun, horseJump,
+		jockeyRun, jockeyJump,
+		shadow, obstacle
+	} = actors;
 	const { x, y } = {
 		x: startFinishSeq
 			? canvasWidth / 2///////// TODO
@@ -80,8 +84,8 @@ export function composeActors({
 
 		//const { horseColor, jockeyColor } : { horseColor?: string, jockeyColor?: string } = phantomColor;
 
-		const horseImage = loadImage(horse);
-		const { frames : horseFrames = 1 } : { frames?: number } = horse;
+		const horseImage = loadImage(horseRun);
+		const { frames : horseFrames = 1 } : { frames?: number } = horseRun;
 		const centerActorOffset = horseImage.width / horseFrames / 2 || 0;
 		const deltaSpeedOffset = (focusSpeed - speed) * DEFAULTS.pixelsPerMapUnit * preciseSecond || 0;
 		const horseCoordinate = {
@@ -89,53 +93,21 @@ export function composeActors({
 			y: trackPosition,
 		};
 		
-		const jockeyImage = loadImage(jockey);
-		const { frames : jockeyFrames = 1 } : { frames?: number } = jockey;
+		const jockeyImage = loadImage(jockeyRun);
+		const { frames : jockeyFrames = 1 } : { frames?: number } = jockeyRun;
+		const horseJumpImage = loadImage(horseJump);
+		const { frames : horseJumpFrames = 1 } : { frames?: number } = horseJump;
+		const jockeyJumpImage = loadImage(jockeyJump);
+		const { frames : jockeyJumpFrames = 1 } : { frames?: number } = jockeyJump;
 		const shadowImage = loadImage(shadow);
 		const { frames : shadowFrames = 1 } : { frames?: number } = shadow;
-		const jockeyOffset = 8;
+		const jockeyOffset = 0;
 		const jockeyCoordinate = {
 			x: x - centerActorOffset - deltaSpeedOffset,
 			y: trackPosition + jockeyOffset,
 		}
 
-		if ( horseCoordinate.x < canvasWidth && (horseCoordinate.x + horseImage?.width / horseFrames) > 0) {
-
-			fillAnimation({
-				source,
-				image: shadowImage,
-				coordinate: jockeyCoordinate,
-				timestamp,
-				fps,
-				cycleSpeed,
-				imageFrames: shadowFrames,
-			});
-	
-			fillAnimation({
-				source,
-				image: horseImage,
-				coordinate: horseCoordinate,
-				timestamp,
-				fps,
-				cycleSpeed,
-				imageFrames: horseFrames,
-				viaPhantom: true,
-				phantomParams: { ...phantomParams, phantomColor: horseColor },
-			});
-	
-			fillAnimation({
-				source,
-				image: jockeyImage,
-				coordinate: jockeyCoordinate,
-				timestamp,
-				fps,
-				cycleSpeed,
-				imageFrames: jockeyFrames,
-				viaPhantom: true,
-				phantomParams: { ...phantomParams, phantomColor: jockeyColor },
-			});
-
-		}
+		let obstaclesList : number[] = [];
 
 		path.forEach((item : ConvertedPath) => {
 
@@ -150,6 +122,8 @@ export function composeActors({
 			const { width: obstacleWidth } = obstacleImage;
 
 			if (coordinateX > canvasWidth || coordinateX + obstacleWidth < 0) return;
+
+			obstaclesList.push(coordinateX);
 			
 			const obstacleCoordinate = {
 				x: coordinateX,
@@ -168,7 +142,53 @@ export function composeActors({
 				request: requestObstacle,
 			   });
 
-		})
+		});
+
+		if ( horseCoordinate.x < canvasWidth && (horseCoordinate.x + horseImage?.width / horseFrames) > 0) {
+
+
+			const intersectObstacle = obstaclesList.reduce((acc, item) => {
+				const proximity = Math.abs(item - horseCoordinate.x) <= DEFAULTS.jumpProximity;
+				return acc || proximity;
+			}, false);
+
+			if (intersectObstacle)
+
+			fillAnimation({
+				source,
+				image: shadowImage,
+				coordinate: jockeyCoordinate,
+				timestamp,
+				fps,
+				cycleSpeed,
+				imageFrames: shadowFrames,
+			});
+	
+			fillAnimation({
+				source,
+				image: intersectObstacle ? horseJumpImage : horseImage,
+				coordinate: horseCoordinate,
+				timestamp,
+				fps,
+				cycleSpeed,
+				imageFrames: intersectObstacle ? horseJumpFrames : horseFrames,
+				viaPhantom: true,
+				phantomParams: { ...phantomParams, phantomColor: horseColor },
+			});
+	
+			fillAnimation({
+				source,
+				image: intersectObstacle ? jockeyJumpImage : jockeyImage,
+				coordinate: jockeyCoordinate,
+				timestamp,
+				fps,
+				cycleSpeed,
+				imageFrames: intersectObstacle ? jockeyJumpFrames : jockeyFrames,
+				viaPhantom: true,
+				phantomParams: { ...phantomParams, phantomColor: jockeyColor },
+			});
+
+		}
 
 		//const obstableMap = path.reduce(reducePath, {});
 

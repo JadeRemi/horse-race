@@ -45,8 +45,10 @@ export function draw({
 
 	};
 	const actors = {
-		horse: DICTIONARY.ACTORS.HORSE,
-		jockey: DICTIONARY.ACTORS.JOCKEY,
+		horseRun: DICTIONARY.ACTORS.HORSE_RUN,
+		horseJump: DICTIONARY.ACTORS.HORSE_JUMP,
+		jockeyRun: DICTIONARY.ACTORS.HORSE_RUN_JOCKEY,
+		jockeyJump: DICTIONARY.ACTORS.HORSE_JUMP_JOCKEY,
 		shadow: DICTIONARY.ACTORS.HORSE_SHADOW,
 		obstacle: DICTIONARY.ACTORS.OBSTACLE_JUMP,
 	}
@@ -56,7 +58,7 @@ export function draw({
 	}
 
 	const fps = DEFAULTS.framesPerSecond;
-	//const timestamp = Date.now();
+
 	const { width: canvasWidth, height: canvasHeight } = canvas;
 	const {
 		backgroundPalette,

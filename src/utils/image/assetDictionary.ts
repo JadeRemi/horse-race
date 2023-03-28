@@ -16,8 +16,10 @@ import HORSE_OUTLINE from '../../assets/images/actor/horse_2.png';
 import HORSE from '../../assets/images/actor/horse_3.png';
 import JOCKEY from '../../assets/images/actor/jockey.png';
 import HORSE_JUMP from '../../assets/images/actor/horse_jump.png';
+import HORSE_JUMP_JOCKEY from '../../assets/images/actor/horse_jump_jockey.png';
 import HORSE_JOCKEY from '../../assets/images/actor/horse_jockey.png';
 import HORSE_RUN from '../../assets/images/actor/horse_run.png';
+import HORSE_RUN_JOCKEY from '../../assets/images/actor/horse_run_jockey.png';
 import HORSE_SHADOW from '../../assets/images/actor/horse_shadow.png';
 
 import OBSTACLE_JUMP from '../../assets/images/actor/obstacle_jump.png';
@@ -144,13 +146,19 @@ const ACTORS = {
 	// multi-actor atlas
 	HORSE_JUMP: {
 		frames: 15,
-		rows: 5,
 		path: HORSE_JUMP,
 	},
+	HORSE_JUMP_JOCKEY: {
+		frames: 15,
+		path: HORSE_JUMP_JOCKEY,
+	},
 	HORSE_RUN: {
-		frames: 9,
-		rows: 5,
+		frames: 13,
 		path: HORSE_RUN,
+	},
+	HORSE_RUN_JOCKEY: {
+		frames: 13,
+		path: HORSE_RUN_JOCKEY,
 	},
 };
 

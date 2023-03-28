@@ -26,6 +26,7 @@ export const DEFAULTS : TDefaults = {
 	lastBreakpoint: 0,
 	timeRecord: 0,
 	pixelsPerMapUnit: 16,
+	jumpProximity: 15,
 };
 
 export const DEFAULT_NAMES = {
